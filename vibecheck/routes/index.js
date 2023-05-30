@@ -1,9 +1,12 @@
 const express = require('express')
 const router = express.Router()
+const usersCtrl = require('../controllers/users')
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Vibecheck' })
+  //Todo add dynamic user-id with req.user
+  res.render('index', { title: 'Vibecheck', id: 1234 })
 })
+
+router.get('/settings', usersCtrl.settings)
 
 module.exports = router

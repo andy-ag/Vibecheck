@@ -1,11 +1,20 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<%- include('./partials/headerHome') %>
+
+<h1>PLACEHOLDER IMAGE</h1>
+<p>Donec lacinia purus dui, ac lobortis augue ultricies quis. Nulla molestie metus sit 
+  amet justo luctus rutrum. Donec sagittis est quis eleifend porta. Etiam hendrerit, nibh
+   sed fringilla ullamcorper, neque arcu iaculis est, ac viverra ipsum turpis ut metus. Etiam 
+   auctor dictum diam, nec tincidunt enim. Nunc risus orci, laoreet ac felis laoreet, condimentum 
+   ultricies purus. Donec tincidunt nulla vitae venenatis ullamcorper. Curabitur lacinia elit 
+   nec mi interdum accumsan. Vivamus ullamcorper lorem pulvinar varius pulvinar. Vivamus id justo 
+   commodo, commodo lorem non, scelerisque diam. Etiam efficitur egestas aliquet. 
+   Vestibulum lacus elit, sodales vel feugiat in, egestas ac lacus. Nam in neque ornare, 
+   iaculis nisl ac, sodales risus. Mauris laoreet, neque at fringilla tempor, nunc enim porta sapien, 
+   quis consequat leo tortor id eros. Nulla eu tortor justo.
+</p>
+
+<form id="signup-home" action="/auth" method="GET">
+  <button type="submit">Sign up / Log in</button>
+</form>
+
+<%- include('./partials/footer') %>
