@@ -1,37 +1,34 @@
-// Todo routes for login / signup
 const express = require('express')
 const router = express.Router()
 const passport = require('passport')
 const authCtrl = require('../controllers/auth')
 
 // login page
-router.get('/', authCtrl.login)
+router.get('/auth', authCtrl.login)
 
 // Google OAuth callback route
+//Todo manage redirection to appropriate route, depending on how
+//Todo auth page was reached. Use req.session info provided by
+//Todo express-session
 router.get('/oauth2callback', passport.authenticate(
     'google',
     {
-      successRedirect: '/movies',
-      failureRedirect: '/movies'
+      successRedirect: '/vibes',
+      //Todo add 'authentication failed' formatting
+      failureRedirect: '/auth/login'
     }
   ))
-    
+
+//TODO Add ability to select username
 // Google OAuth login route
-router.get('/auth/google', passport.authenticate(
-    // Which passport strategy is being used?
-    'google',
-    {
-      // Requesting the user's profile and email
+router.get('/auth/google', passport.authenticate('google', {
       scope: ['profile', 'email'],
-      // Optionally force pick account every time
-      // prompt: "select_account"
-    }
-  ))
+    }))
   
 // OAuth logout route
 router.get('/logout', function(req, res){
     req.logout(function() {
-      res.redirect('/movies')
+      res.redirect('/vibes/index')
     })
   })
 
