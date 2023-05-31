@@ -28,7 +28,7 @@ router.get('/auth/google', passport.authenticate('google', {
 // OAuth logout route
 router.get('/logout', function(req, res){
     req.logout(function() {
-      res.redirect('/vibes/index')
+      res.redirect('/vibes')
     })
   })
 

@@ -1,6 +1,18 @@
 <!-- Board creation page -->
 <%- include('../partials/header') %>
 
+<script src="/javascripts/canvas.js" defer></script>
+
+<% if (user) { %>
+    <h1>Logged in</h1>
+<% } else { %>
+    <h1>Log in to add vibes</h1>
+<% } %>
+
+<button id="image">Image</button>
+<button id="text">Text</button>
+<button id="link">Link</button>
+
 <form id="save-vibe" action="/vibes" method="POST">
     <button type="submit">SAVE</button>
 </form>
