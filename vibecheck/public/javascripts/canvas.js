@@ -1,14 +1,30 @@
 //! Script to monitor canvas operations
 // Adding divs based on form
+//TODO add layering for images - active image always first
 
 document.addEventListener('click', e => {
     let clicker = e.target.id
     switch (clicker) {
-        case image: addDiv(image)
+        case image: {
+            toggleImageURLPopup()
+        }
         break
         case text: addDiv(text)
         break
-        case link: addDiv(link)
+        // case link: addDiv(link)
+    }
+})
+
+document.addEventListener('click', e => {
+    let clicker = e.target.id
+    switch (clicker) {
+        case cancelImg.id: toggleImageURLPopup()
+        break
+        case submitImg.id: {
+            addImage()
+            imgUrl.innerText=''
+            toggleImageURLPopup() 
+        }
     }
 })
 
@@ -17,10 +33,18 @@ document.addEventListener('click', e => {
 // let coords = []
 // let getCoordsRectangle = element.getBoundingClientRec()
 // console.log(rect.top, rect.right, rect.bottom, rect.left)
+//TODO delete functionality
 
 const image = document.getElementById('image').id
 const text = document.getElementById('text').id
 const link = document.getElementById('link').id
+
+const popup = document.getElementById('image-popup')
+const imgUrl = document.getElementById('add-url')
+const submitImg = document.getElementById('submit-image')
+const cancelImg = document.getElementById('cancel-image')
+
+
 let idAssigner = 0
 
 function addDiv(type) {
@@ -38,6 +62,24 @@ function addDiv(type) {
     element.appendChild(textdiv)
     textdiv.contentEditable = "true"
     makeDraggable(element)
+}
+
+function toggleImageURLPopup() {
+    if (popup.style.visibility === 'visible') {
+        popup.style.visibility = 'hidden'
+    } else {
+        popup.style.visibility = 'visible' 
+    }
+}
+
+function addImage() {
+    let image = document.createElement('img')
+    image.id = idAssigner
+    image.classList.add('image')
+    idAssigner++
+    image.src = imgUrl.innerText.trim()
+    makeDraggable(image)
+    document.body.appendChild(image)
 }
 
 function makeDraggable(element) {

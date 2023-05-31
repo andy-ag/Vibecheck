@@ -32,3 +32,22 @@ button, form {
   border: solid red 1px;
   height: 80%
 }
+
+#image-popup {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -50px;
+  width: 300px;
+  height: 300px;
+  border: solid black 1px;
+  visibility: hidden;
+}
+
+#add-url {
+  height: 50px;
+  
+}
