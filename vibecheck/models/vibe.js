@@ -19,16 +19,8 @@ const vibeSchema = new Schema({
 })
 
 const itemSchema = new Schema({
-    type: {
-        type: String,
-        required: true
-    },
     content: {
         type: String,
-        required: true
-    },
-    coords: {
-        type: [ Number ],
         required: true
     }
 })

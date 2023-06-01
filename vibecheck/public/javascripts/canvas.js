@@ -31,12 +31,21 @@ document.addEventListener('click', e => {
             togglePopup(linkPopup)
         }
         break
+    }
+})
 
+document.addEventListener('click', e => {
+    let clicker = e.target.id
+    if (clicker.startsWith('delete')) {
+      newVibe.removeItem(e.target)  
+      deleteElement(getNumericId(e.target))
     }
 })
 
 
-
+//TODO Check: can viewwindow fit full canvas? If so, display normal
+//TODO If not: shrink canvas and all elements proportionally
+//TODO potential issue with spotify widget
 
 // clientX, clientY track x,y client coords
 //TODO command to get coordinates of div-bounding client rectangle
@@ -46,10 +55,14 @@ document.addEventListener('click', e => {
 //TODO delete functionality
 //TODO fix functionality - iterate over elements and hide headers
 
+
 const image = document.getElementById('image').id
 const text = document.getElementById('text').id
 const link = document.getElementById('link').id
 
+const canvas = document.getElementById('canvas')
+const CANVAS_HEIGHT = canvas.style.height
+const CANVAS_WIDTH = canvas.style.width
 const imgPopup = document.getElementById('image-popup')
 const linkPopup = document.getElementById('link-popup')
 const imgUrl = document.getElementById('add-url')
@@ -60,6 +73,9 @@ const cancelLink = document.getElementById('cancel-link')
 const linkUrl = document.getElementById('add-link')
 const linkText = document.getElementById('link-text')
 
+//TODO largest value of id needs to be retrieved, incremented 
+
+//TODO relative page position finder
 let idAssigner = 0
 
 class Vibe{
@@ -67,23 +83,43 @@ class Vibe{
     this.name = name
     this.items = []
   }
+
+  addItem(element) {
+    this.items.unshift(new Item(element.id))
+  }
+
+  removeItem(element) {
+    const removalIndex = this.items.findIndex(item => item.itemId === element.id)
+    this.items.splice(removalIndex, 1)
+  }
+
+  getValues() {
+    for (let item of this.items) {
+      item.getValue()
+    }
+  }
 }
 
 class Item{
-  constructor(type, id) {
-    this.type = type
-    this.id = id
-    this.coordinates = []
+  constructor(itemId) {
+    this.itemId = itemId
     this.value = null
   }
+
+  getValue() {
+    const element = document.getElementById(this.itemId)
+    this.value = element.outerHTML
+  }
 }
+
+newVibe = new Vibe('unnamed')
 
 function addDiv() {
     let element = document.createElement('div')
     element.classList.add('text')
     element.id = idAssigner
     idAssigner++
-    document.body.appendChild(element)
+    canvas.appendChild(element)
     let header = document.createElement('div')
     header.id = `${element.id}header`
     header.classList.add('drag')
@@ -97,6 +133,7 @@ function addDiv() {
     element.appendChild(textdiv)
     textdiv.contentEditable = "true"
     makeDraggable(element)
+    newVibe.addItem(element)
 }
 
 function togglePopup(popup) {
@@ -112,7 +149,7 @@ function addDiv_image() {
   element.classList.add('image')
   element.id = idAssigner
   idAssigner++
-  document.body.appendChild(element)
+  canvas.appendChild(element)
   let header = document.createElement('div')
   header.id = `${element.id}header`
   header.classList.add('drag')
@@ -125,6 +162,7 @@ function addDiv_image() {
   image.src = imgUrl.innerText.trim()
   element.appendChild(image)
   makeDraggable(element)
+  newVibe.addItem(element)
 }
 
 function addLink() {
@@ -132,7 +170,7 @@ function addLink() {
   element.classList.add('link')
   element.id = idAssigner
   idAssigner++
-  document.body.appendChild(element)
+  canvas.appendChild(element)
   let header = document.createElement('div')
   header.id = `${element.id}header`
   header.classList.add('drag')
@@ -156,11 +194,15 @@ function addLink() {
     link.innerText = linkUrl.innerText.trim()
   }
   makeDraggable(element)
+  newVibe.addItem(element)
 }
 
-function removeElement(id) {
-  let element = document.getElementById(id)
-  element.remove()
+function deleteElement(id) {
+    document.getElementById(id).remove()
+}
+
+function getNumericId(element) {
+  return element.id.replace(/\D/g, '')
 }
 
 function makeDraggable(element) {
@@ -203,3 +245,4 @@ function makeDraggable(element) {
     document.onmousemove = null;
   }
 }
+

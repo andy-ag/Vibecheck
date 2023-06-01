@@ -58,6 +58,7 @@ button, form {
   height: 300px;
   border: solid black 1px;
   visibility: hidden;
+  z-index: 100;
 }
 
 #add-url {
@@ -67,4 +68,11 @@ button, form {
 .imgdiv {
   height: auto;
   width: auto;
+}
+
+#canvas {
+  position: relative;
+  height: 800px;
+  width: 1500px;
+  border: solid black 1px;
 }
