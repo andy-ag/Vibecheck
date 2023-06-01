@@ -2,6 +2,7 @@
 body {
   padding: 50px;
   font-family: 'Exo', sans-serif;
+  box-sizing: border-box;
 }
 
 a {
@@ -12,7 +13,7 @@ button, form {
   font-family: 'Exo', sans-serif;
 }
 
-.image, .text, .link {
+.text, .link {
   border: solid black 1px;
   height: 200px;
   width: 200px;
@@ -22,8 +23,20 @@ button, form {
   z-index: 10;
 }
 
+.image {
+  display: flex;
+  flex-direction: column;
+  border: solid black 1px;
+  position: absolute;
+  resize: both;
+  overflow: auto;
+  z-index: 10;
+}
+
 .drag {
-  background:green;
+  display: flex;
+  justify-content: flex-end;
+  background: rgb(153 231 252);
   padding: 10px;
   z-index: 11;
 }
@@ -33,7 +46,7 @@ button, form {
   height: 80%
 }
 
-#image-popup {
+#image-popup, #link-popup {
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -49,5 +62,9 @@ button, form {
 
 #add-url {
   height: 50px;
-  
+}
+
+.imgdiv {
+  height: auto;
+  width: auto;
 }

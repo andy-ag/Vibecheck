@@ -1,32 +1,42 @@
 //! Script to monitor canvas operations
 // Adding divs based on form
 //TODO add layering for images - active image always first
+//TODO test browserify
 
 document.addEventListener('click', e => {
     let clicker = e.target.id
     switch (clicker) {
         case image: {
-            toggleImageURLPopup()
+            togglePopup(imgPopup)
         }
         break
-        case text: addDiv(text)
+        case text: addDiv()
         break
-        // case link: addDiv(link)
+        case link: togglePopup(linkPopup)
+        break
+        case cancelImg.id: togglePopup(imgPopup)
+        break
+        case submitImg.id: {
+            addDiv_image()
+            imgUrl.innerText=''
+            togglePopup(imgPopup)
+        }
+        break
+        case cancelLink.id: togglePopup(linkPopup)
+        break
+        case submitLink.id: {
+            addLink()
+            linkUrl.innerText=''
+            linkText.innerText=''
+            togglePopup(linkPopup)
+        }
+        break
+
     }
 })
 
-document.addEventListener('click', e => {
-    let clicker = e.target.id
-    switch (clicker) {
-        case cancelImg.id: toggleImageURLPopup()
-        break
-        case submitImg.id: {
-            addImage()
-            imgUrl.innerText=''
-            toggleImageURLPopup() 
-        }
-    }
-})
+
+
 
 // clientX, clientY track x,y client coords
 //TODO command to get coordinates of div-bounding client rectangle
@@ -34,22 +44,43 @@ document.addEventListener('click', e => {
 // let getCoordsRectangle = element.getBoundingClientRec()
 // console.log(rect.top, rect.right, rect.bottom, rect.left)
 //TODO delete functionality
+//TODO fix functionality - iterate over elements and hide headers
 
 const image = document.getElementById('image').id
 const text = document.getElementById('text').id
 const link = document.getElementById('link').id
 
-const popup = document.getElementById('image-popup')
+const imgPopup = document.getElementById('image-popup')
+const linkPopup = document.getElementById('link-popup')
 const imgUrl = document.getElementById('add-url')
 const submitImg = document.getElementById('submit-image')
 const cancelImg = document.getElementById('cancel-image')
-
+const submitLink = document.getElementById('submit-link')
+const cancelLink = document.getElementById('cancel-link')
+const linkUrl = document.getElementById('add-link')
+const linkText = document.getElementById('link-text')
 
 let idAssigner = 0
 
-function addDiv(type) {
+class Vibe{
+  constructor(name) {
+    this.name = name
+    this.items = []
+  }
+}
+
+class Item{
+  constructor(type, id) {
+    this.type = type
+    this.id = id
+    this.coordinates = []
+    this.value = null
+  }
+}
+
+function addDiv() {
     let element = document.createElement('div')
-    element.classList.add(type)
+    element.classList.add('text')
     element.id = idAssigner
     idAssigner++
     document.body.appendChild(element)
@@ -57,6 +88,10 @@ function addDiv(type) {
     header.id = `${element.id}header`
     header.classList.add('drag')
     element.appendChild(header)
+    let button = document.createElement('button')
+    button.id = `delete${element.id}`
+    button.innerText = 'X'
+    header.appendChild(button)
     let textdiv = document.createElement('div')
     textdiv.classList.add('textbox')
     element.appendChild(textdiv)
@@ -64,22 +99,68 @@ function addDiv(type) {
     makeDraggable(element)
 }
 
-function toggleImageURLPopup() {
-    if (popup.style.visibility === 'visible') {
-        popup.style.visibility = 'hidden'
-    } else {
-        popup.style.visibility = 'visible' 
-    }
+function togglePopup(popup) {
+  if (popup.style.visibility === 'visible') {
+    popup.style.visibility = 'hidden'
+  } else {
+    popup.style.visibility = 'visible' 
+  }
 }
 
-function addImage() {
-    let image = document.createElement('img')
-    image.id = idAssigner
-    image.classList.add('image')
-    idAssigner++
-    image.src = imgUrl.innerText.trim()
-    makeDraggable(image)
-    document.body.appendChild(image)
+function addDiv_image() {
+  let element = document.createElement('div')
+  element.classList.add('image')
+  element.id = idAssigner
+  idAssigner++
+  document.body.appendChild(element)
+  let header = document.createElement('div')
+  header.id = `${element.id}header`
+  header.classList.add('drag')
+  element.appendChild(header)
+  let button = document.createElement('button')
+  button.id = `delete${element.id}`
+  button.innerText = 'X'
+  header.appendChild(button)
+  let image = document.createElement('img')
+  image.src = imgUrl.innerText.trim()
+  element.appendChild(image)
+  makeDraggable(element)
+}
+
+function addLink() {
+  let element = document.createElement('div')
+  element.classList.add('link')
+  element.id = idAssigner
+  idAssigner++
+  document.body.appendChild(element)
+  let header = document.createElement('div')
+  header.id = `${element.id}header`
+  header.classList.add('drag')
+  element.appendChild(header)
+  let button = document.createElement('button')
+  button.id = `delete${element.id}`
+  button.innerText = 'X'
+  header.appendChild(button)
+  let link = document.createElement('a')
+  link.target = '_blank'
+  link.classList.add('textbox')
+  element.appendChild(link)
+  if (linkUrl.innerText.trim().includes('http')) {
+    link.href = linkUrl.innerText.trim()
+  } else {
+    link.href = `https://${linkUrl.innerText.trim()}`
+  }
+  if (linkText.innerText) {
+    link.innerText = linkText.innerText
+  } else {
+    link.innerText = linkUrl.innerText.trim()
+  }
+  makeDraggable(element)
+}
+
+function removeElement(id) {
+  let element = document.getElementById(id)
+  element.remove()
 }
 
 function makeDraggable(element) {
