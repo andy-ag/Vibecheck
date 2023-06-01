@@ -1,6 +1,17 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
+const itemSchema = new Schema({
+    itemId: {
+        type: String,
+        required: true
+    },
+    content: {
+        type: String,
+        required: true
+    }
+})
+
 const vibeSchema = new Schema({
     name: {
         type: String,
@@ -16,13 +27,6 @@ const vibeSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     }]
-})
-
-const itemSchema = new Schema({
-    content: {
-        type: String,
-        required: true
-    }
 })
 
 module.exports = mongoose.model('Vibe', vibeSchema)

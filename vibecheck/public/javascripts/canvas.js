@@ -42,6 +42,12 @@ document.addEventListener('click', e => {
     }
 })
 
+document.addEventListener('click', e => {
+    let clicker = e.target.id
+    if (clicker === 'save') {
+      saveVibe()
+    }
+})
 
 //TODO Check: can viewwindow fit full canvas? If so, display normal
 //TODO If not: shrink canvas and all elements proportionally
@@ -52,13 +58,14 @@ document.addEventListener('click', e => {
 // let coords = []
 // let getCoordsRectangle = element.getBoundingClientRec()
 // console.log(rect.top, rect.right, rect.bottom, rect.left)
-//TODO delete functionality
 //TODO fix functionality - iterate over elements and hide headers
 
 
 const image = document.getElementById('image').id
 const text = document.getElementById('text').id
 const link = document.getElementById('link').id
+
+const saveUrl = '/vibes'
 
 const canvas = document.getElementById('canvas')
 const CANVAS_HEIGHT = canvas.style.height
@@ -103,16 +110,31 @@ class Vibe{
 class Item{
   constructor(itemId) {
     this.itemId = itemId
-    this.value = null
+    this.content = null
   }
 
   getValue() {
     const element = document.getElementById(this.itemId)
-    this.value = element.outerHTML
+    this.content = element.outerHTML
   }
 }
 
 newVibe = new Vibe('unnamed')
+
+async function saveVibe() {
+  newVibe.getValues()
+  try {
+    await fetch(saveUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(newVibe)
+    })
+  } catch (error) {
+      console.log(error)
+  }
+}
 
 function addDiv() {
     let element = document.createElement('div')

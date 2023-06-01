@@ -6,6 +6,8 @@ function login (req, res) {
     res.render('auth/login', { title: 'Login', id: 1234 })
 }
 
+
+
 module.exports = {
     login
 }

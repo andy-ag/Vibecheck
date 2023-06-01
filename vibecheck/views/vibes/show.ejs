@@ -2,5 +2,10 @@
 <%- include('../partials/header') %>
 
 <!-- TODO needs all info to reconstruct vibe from database -->
+<div id="canvas">
+<% for (let item of vibe.items) { %>
+    <%- item.content %>
+<% } %>
+</div>
 
 <%- include('../partials/footer') %>

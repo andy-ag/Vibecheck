@@ -11,7 +11,7 @@ router.get('/', vibesCtrl.index)
 router.get('/new', vibesCtrl.new)
 
 // show
-router.get('/:id/vibes', vibesCtrl.show)
+router.get('/:id', vibesCtrl.show)
 
 // create
 router.post('/', vibesCtrl.create)
