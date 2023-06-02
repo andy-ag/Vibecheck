@@ -2,7 +2,6 @@
 // Adding divs based on form
 //TODO add layering for images - active image always first
 //TODO test browserify
-import interact from 'interactjs'
 
 document.addEventListener('click', e => {
     let clicker = e.target.id
@@ -64,7 +63,6 @@ document.addEventListener('click', e => {
 // let getCoordsRectangle = element.getBoundingClientRec()
 // console.log(rect.top, rect.right, rect.bottom, rect.left)
 //TODO fix functionality - iterate over elements and hide headers
-
 
 const image = document.getElementById('image').id
 const text = document.getElementById('text').id
@@ -151,22 +149,23 @@ async function saveVibe() {
 function addDiv() {
     let element = document.createElement('div')
     element.classList.add('text')
+    element.classList.add('drag-resize')
     element.id = idAssigner
     idAssigner++
     canvas.appendChild(element)
-    let header = document.createElement('div')
-    header.id = `${element.id}header`
-    header.classList.add('drag')
-    element.appendChild(header)
-    let button = document.createElement('button')
-    button.id = `delete${element.id}`
-    button.innerText = 'X'
-    header.appendChild(button)
+    // let header = document.createElement('div')
+    // header.id = `${element.id}header`
+    // header.classList.add('drag')
+    // element.appendChild(header)
+    // let button = document.createElement('button')
+    // button.id = `delete${element.id}`
+    // button.innerText = 'X'
+    // header.appendChild(button)
     let textdiv = document.createElement('div')
     textdiv.classList.add('textbox')
     element.appendChild(textdiv)
     textdiv.contentEditable = "true"
-    makeDraggable(element)
+    // makeDraggable(element)
     newVibe.addItem(element)
 }
 
@@ -181,38 +180,40 @@ function togglePopup(popup) {
 function addDiv_image() {
   let element = document.createElement('div')
   element.classList.add('image')
+  element.classList.add('drag-resize')
   element.id = idAssigner
   idAssigner++
   canvas.appendChild(element)
-  let header = document.createElement('div')
-  header.id = `${element.id}header`
-  header.classList.add('drag')
-  element.appendChild(header)
-  let button = document.createElement('button')
-  button.id = `delete${element.id}`
-  button.innerText = 'X'
-  header.appendChild(button)
+  // let header = document.createElement('div')
+  // header.id = `${element.id}header`
+  // header.classList.add('drag')
+  // element.appendChild(header)
+  // let button = document.createElement('button')
+  // button.id = `delete${element.id}`
+  // button.innerText = 'X'
+  // header.appendChild(button)
   let image = document.createElement('img')
   image.src = imgUrl.innerText.trim()
   element.appendChild(image)
-  makeDraggable(element)
+  // makeDraggable(element)
   newVibe.addItem(element)
 }
 
 function addLink() {
   let element = document.createElement('div')
   element.classList.add('link')
+  element.classList.add('drag-resize')
   element.id = idAssigner
   idAssigner++
   canvas.appendChild(element)
-  let header = document.createElement('div')
-  header.id = `${element.id}header`
-  header.classList.add('drag')
-  element.appendChild(header)
-  let button = document.createElement('button')
-  button.id = `delete${element.id}`
-  button.innerText = 'X'
-  header.appendChild(button)
+  // let header = document.createElement('div')
+  // header.id = `${element.id}header`
+  // header.classList.add('drag')
+  // element.appendChild(header)
+  // let button = document.createElement('button')
+  // button.id = `delete${element.id}`
+  // button.innerText = 'X'
+  // header.appendChild(button)
   let link = document.createElement('a')
   link.target = '_blank'
   link.classList.add('textbox')
@@ -227,7 +228,7 @@ function addLink() {
   } else {
     link.innerText = linkUrl.innerText.trim()
   }
-  makeDraggable(element)
+  // makeDraggable(element)
   newVibe.addItem(element)
 }
 
@@ -239,43 +240,44 @@ function getNumericId(element) {
   return element.id.replace(/\D/g, '')
 }
 
-function makeDraggable(element) {
-  let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  if (document.getElementById(element.id + "header")) {
-    // if present, the header is where you move the DIV from:
-    document.getElementById(element.id + "header").onmousedown = dragMouseDown;
-  } else {
-    // otherwise, move the DIV from anywhere inside the DIV:
-    element.onmousedown = dragMouseDown;
-  }
 
-  function dragMouseDown(e) {
-    e = e || window.event;
-    e.preventDefault();
-    // get the mouse cursor position at startup:
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    document.onmouseup = closeDragElement;
-    // call a function whenever the cursor moves:
-    document.onmousemove = elementDrag;
-  }
+// function makeDraggable(element) {
+//   let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+//   if (document.getElementById(element.id + "header")) {
+//     // if present, the header is where you move the DIV from:
+//     document.getElementById(element.id + "header").onmousedown = dragMouseDown;
+//   } else {
+//     // otherwise, move the DIV from anywhere inside the DIV:
+//     element.onmousedown = dragMouseDown;
+//   }
 
-  function elementDrag(e) {
-    e = e || window.event;
-    e.preventDefault();
-    // calculate the new cursor position:
-    pos1 = pos3 - e.clientX;
-    pos2 = pos4 - e.clientY;
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    // set the element's new position:
-    element.style.top = (element.offsetTop - pos2) + "px";
-    element.style.left = (element.offsetLeft - pos1) + "px";
-  }
+//   function dragMouseDown(e) {
+//     e = e || window.event;
+//     e.preventDefault();
+//     // get the mouse cursor position at startup:
+//     pos3 = e.clientX;
+//     pos4 = e.clientY;
+//     document.onmouseup = closeDragElement;
+//     // call a function whenever the cursor moves:
+//     document.onmousemove = elementDrag;
+//   }
 
-  function closeDragElement() {
-    // stop moving when mouse button is released:
-    document.onmouseup = null;
-    document.onmousemove = null;
-  }
-}
+//   function elementDrag(e) {
+//     e = e || window.event;
+//     e.preventDefault();
+//     // calculate the new cursor position:
+//     pos1 = pos3 - e.clientX;
+//     pos2 = pos4 - e.clientY;
+//     pos3 = e.clientX;
+//     pos4 = e.clientY;
+//     // set the element's new position:
+//     element.style.top = (element.offsetTop - pos2) + "px";
+//     element.style.left = (element.offsetLeft - pos1) + "px";
+//   }
+
+//   function closeDragElement() {
+//     // stop moving when mouse button is released:
+//     document.onmouseup = null;
+//     document.onmousemove = null;
+//   }
+// }

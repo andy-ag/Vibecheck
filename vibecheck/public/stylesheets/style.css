@@ -18,7 +18,6 @@ button, form {
   height: 200px;
   width: 200px;
   position: absolute;
-  resize: both;
   overflow: auto;
   z-index: 10;
 }
@@ -26,9 +25,7 @@ button, form {
 .image {
   display: flex;
   flex-direction: column;
-  border: solid black 1px;
   position: absolute;
-  resize: both;
   overflow: auto;
   z-index: 10;
 }
