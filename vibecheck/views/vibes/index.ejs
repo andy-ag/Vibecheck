@@ -3,6 +3,7 @@
 
 <!-- TODO vibe must be scaled to viewer's monitor -->
 <% for (let vibe of vibes) { %>
+    <h1> <%= vibe.name %> by <%= user.name %> </h1>
     <div class="canvas">
         <% for (let item of vibe.items) { %>
             <%- item.content %>

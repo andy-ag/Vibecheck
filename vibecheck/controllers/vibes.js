@@ -6,7 +6,7 @@ const Vibe = require('../models/vibe')
 
 async function index (req, res) {
     try {
-        const vibes = await Vibe.find({})
+        const vibes = await Vibe.find({}).sort({updatedAt: -1})
         res.render('vibes/index', { title: 'Latest vibes', vibes: vibes })
     } catch (error) {
         // think of best choice here to avoid infinite loop
@@ -19,7 +19,8 @@ async function index (req, res) {
 async function show (req, res) {
     try {
         const vibe = await Vibe.findById(req.params.id)
-        res.render('vibes/show', { title: 'Vibe details', vibe: vibe })
+        const user = await User.findById(vibe.user)
+        res.render('vibes/show', { title: 'Vibe details', vibe: vibe, user: user })
     } catch (error) {
         console.log(error)
         res.redirect('/vibes')
@@ -33,9 +34,11 @@ function newVibe (req, res) {
 async function create (req, res) {
     // Todo save vibe created on vibes/new page
     try {
-        console.log('USER ID -->', req.user._id)
         req.body.user = req.user._id;
+        const user = await User.findById(req.user._id)
         const vibe = await Vibe.create(req.body)
+        user.ownVibes.unshift(vibe._id)
+        await user.save()
         res.redirect(`/vibes/${vibe._id}`)
     } catch (error) {
         console.log(error)

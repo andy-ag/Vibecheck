@@ -1,18 +1,18 @@
 <!-- Board creation page -->
+<!-- Page cannot be accessed without being logged in -->
 <%- include('../partials/header') %>
 
 <script src="/javascripts/canvas.js" defer></script>
 
-<% if (user) { %>
-    <h1>Logged in</h1>
-<% } else { %>
-    <h1>Log in to add vibes</h1>
-<% } %>
-
+<form onkeydown="return event.key != 'Enter';">
+    <label>What's the vibe?</label>
+    <input type="text" id="vibename" maxlength="100">
+    <button id="vibename-submit" type="button">Update name</button>
+</form>
 <button id="image">Image</button>
 <button id="text">Text</button>
 <button id="link">Link</button>
-
+<h1 id="vibename-h1">Think of a name</h1>
 <div id="canvas"></div>
 
 <button id="save">SAVE</button>

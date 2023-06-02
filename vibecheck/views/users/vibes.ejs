@@ -3,6 +3,15 @@
 
 <a href="#">My vibes</a>
 <a href="#">Liked</a>
-<a href="/users/<%= id %>/settings">Settings</a>
+<a href="/users/<%= user._id %>/settings">Settings</a>
+
+<% for (let vibe of vibes) { %>
+    <h1> <%= vibe.name %></h1>
+    <div class="canvas">
+        <% for (let item of vibe.items) { %>
+            <%- item.content %>
+        <% } %>
+    </div>    
+<% } %>
 
 <%- include('../partials/footer') %>

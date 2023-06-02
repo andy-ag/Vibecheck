@@ -2,6 +2,7 @@
 // Adding divs based on form
 //TODO add layering for images - active image always first
 //TODO test browserify
+import interact from 'interactjs'
 
 document.addEventListener('click', e => {
     let clicker = e.target.id
@@ -31,6 +32,10 @@ document.addEventListener('click', e => {
             togglePopup(linkPopup)
         }
         break
+        case submitName.id: {
+          vibenameH1.innerText = vibenameInput.value
+          newVibe.name = vibenameInput.value
+        }
     }
 })
 
@@ -79,6 +84,9 @@ const submitLink = document.getElementById('submit-link')
 const cancelLink = document.getElementById('cancel-link')
 const linkUrl = document.getElementById('add-link')
 const linkText = document.getElementById('link-text')
+const submitName = document.getElementById('vibename-submit')
+const vibenameInput = document.getElementById('vibename')
+const vibenameH1 = document.getElementById('vibename-h1')
 
 //TODO largest value of id needs to be retrieved, incremented 
 
@@ -96,7 +104,7 @@ class Vibe{
   }
 
   removeItem(element) {
-    const removalIndex = this.items.findIndex(item => item.itemId === element.id)
+    const removalIndex = this.items.findIndex(item => item.itemId === getNumericId(element))
     this.items.splice(removalIndex, 1)
   }
 

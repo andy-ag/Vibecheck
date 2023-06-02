@@ -1,7 +1,8 @@
 <!-- View published board -->
 <%- include('../partials/header') %>
 
-<!-- TODO needs all info to reconstruct vibe from database -->
+<h1> <%= vibe.name %> by <%= user.name %> </h1>
+
 <div id="canvas">
 <% for (let item of vibe.items) { %>
     <%- item.content %>
