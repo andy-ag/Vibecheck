@@ -2,5 +2,12 @@
 <%- include('../partials/header') %>
 
 <!-- TODO vibe must be scaled to viewer's monitor -->
+<% for (let vibe of vibes) { %>
+    <div class="canvas">
+        <% for (let item of vibe.items) { %>
+            <%- item.content %>
+        <% } %>
+    </div>    
+<% } %>
 
 <%- include('../partials/footer') %>

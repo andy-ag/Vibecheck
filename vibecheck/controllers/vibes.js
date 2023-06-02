@@ -4,13 +4,26 @@
 const User = require('../models/user')
 const Vibe = require('../models/vibe')
 
-function index (req, res) {
-    res.render('vibes/index', { title: 'Latest vibes', id: 1234 })
+async function index (req, res) {
+    try {
+        const vibes = await Vibe.find({})
+        res.render('vibes/index', { title: 'Latest vibes', vibes: vibes })
+    } catch (error) {
+        // think of best choice here to avoid infinite loop
+        // homepage should direct to /vibes/ 
+        console.log(error)
+        res.redirect('/')
+    }
 }
 
 async function show (req, res) {
-    const vibe = await Vibe.findById(req.params.id)
-    res.render('vibes/show', { title: 'Vibe details', vibe: vibe })
+    try {
+        const vibe = await Vibe.findById(req.params.id)
+        res.render('vibes/show', { title: 'Vibe details', vibe: vibe })
+    } catch (error) {
+        console.log(error)
+        res.redirect('/vibes')
+    }
 }
 
 function newVibe (req, res) {
@@ -20,12 +33,13 @@ function newVibe (req, res) {
 async function create (req, res) {
     // Todo save vibe created on vibes/new page
     try {
-        const vibe = await Vibe.create(req.body)
+        console.log('USER ID -->', req.user._id)
         req.body.user = req.user._id;
-        res.redirect(`vibes/${vibe._id}`, { vibe: vibe })
+        const vibe = await Vibe.create(req.body)
+        res.redirect(`/vibes/${vibe._id}`)
     } catch (error) {
         console.log(error)
-        res.redirect('vibes/new', { error })
+        res.redirect('/vibes/new', { error })
     }
     
 }

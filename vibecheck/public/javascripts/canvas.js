@@ -124,13 +124,17 @@ newVibe = new Vibe('unnamed')
 async function saveVibe() {
   newVibe.getValues()
   try {
-    await fetch(saveUrl, {
+    const response = await fetch(saveUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
+      redirect: 'follow',
       body: JSON.stringify(newVibe)
     })
+    if (response.redirected) {
+      window.location.href = response.url;
+  }
   } catch (error) {
       console.log(error)
   }
@@ -267,4 +271,3 @@ function makeDraggable(element) {
     document.onmousemove = null;
   }
 }
-

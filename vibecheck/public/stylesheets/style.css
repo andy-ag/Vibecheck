@@ -70,9 +70,10 @@ button, form {
   width: auto;
 }
 
-#canvas {
+#canvas, .canvas {
   position: relative;
   height: 800px;
   width: 1500px;
   border: solid black 1px;
+  margin-bottom: 50px;
 }

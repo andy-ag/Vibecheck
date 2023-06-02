@@ -27,6 +27,8 @@ const vibeSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     }]
+}, {
+    timestamps: true
 })
 
 module.exports = mongoose.model('Vibe', vibeSchema)
