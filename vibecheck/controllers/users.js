@@ -19,6 +19,8 @@ async function vibes (req, res) {
     }
 }
 
+//TODO add ability to delete from user page too
+
 module.exports = {
     settings,
     vibes,

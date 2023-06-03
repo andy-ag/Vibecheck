@@ -1,6 +1,7 @@
 //! Manages control flow for vibe-related actions
 //Todo write controllers
 //Todo export titles
+const user = require('../models/user')
 const User = require('../models/user')
 const Vibe = require('../models/vibe')
 
@@ -27,7 +28,7 @@ async function show (req, res) {
 }
 
 function newVibe (req, res) {
-    res.render('vibes/new', { title: 'Create new vibe', id: 1234 })
+    res.render('vibes/new', { title: 'Create new vibe'})
 }
 
 async function create (req, res) {
@@ -46,16 +47,50 @@ async function create (req, res) {
     
 }
 
-function remove (req, res) {
+async function remove (req, res) {
     // Todo delete vibe from vibes/:id or users/:id/vibes
-    res.redirect('users/:id/vibes')
+    try {
+        const vibe = await Vibe.findById(req.params.id)
+        const user = await User.findById(vibe.user._id)
+        if (vibe.user._id.toString() !== res.locals.user._id.toString()) {
+            req.method = 'GET'
+            return res.redirect('/vibes')
+        }
+        await user.ownVibes.pull(vibe._id)
+        await user.save()
+        await vibe.deleteOne()
+        req.method = 'GET'
+        res.redirect(`/users/${res.locals.user._id}`)
+    } catch (error) {
+        console.log(error)
+        res.redirect(`/vibes/${res.locals.user._id}`)
+    }
 }
 
-function update (req, res) {
-    // Todo update vibe from show::edit
-    res.redirect('vibes/:id', {title: 'Vibe details'})
+async function update (req, res) {
+    try {
+        const vibe = await Vibe.findById(req.params.id)
+        vibe.name = req.body.name
+        vibe.items = req.body.items
+        await vibe.save()
+        req.method = 'GET'
+        res.redirect(`/users/${vibe.user._id}`)
+    } catch (error) {
+        console.log(error)
+        res.redirect(`/vibes`)
+    }
 }
 
+async function edit (req, res) {
+    try {
+        const vibe = await Vibe.findById(req.params.id).populate('user')
+        if (vibe.user._id.toString() !== res.locals.user._id.toString()) return res.redirect('/vibes')
+        res.render('vibes/edit', { title: `${vibe.name} - editing`, vibe: vibe})
+    } catch (error) {
+        console.log(error)
+        res.redirect('/vibes')
+    }
+}
 
 module.exports = {
     index,
@@ -63,5 +98,6 @@ module.exports = {
     new: newVibe,
     create,
     remove,
-    update
+    update,
+    edit
 }

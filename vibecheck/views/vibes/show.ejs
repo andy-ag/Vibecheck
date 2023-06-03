@@ -1,11 +1,16 @@
 <!-- View published board -->
 <%- include('../partials/header') %>
 <div class="show-header">
-    <h1><%= vibe.name %> by <a target="_blank" href="/users/<%= vibe.user._id %>"><%= vibe.user.name %></a></h1>
+    <h1><%= vibe.name %> by <a href="/users/<%= vibe.user._id %>"><%= vibe.user.name %></a></h1>
 <button id="vibe-like">LIKE</button>
    <% if (user && user._id.toString() === vibe.user._id.toString()) { %>
-        <button id="vibe-edit">EDIT</button>
-        <button id="vibe-delete">DELETE</button>
+        <form action="/vibes/<%= vibe._id %>/edit" method="GET">
+            <button>EDIT</button>
+        </form>
+        <form action="/vibes/<%= vibe._id %>?_method=DELETE" method="POST">
+            <button>DELETE</button>
+        </form>
+        
     <% } %>
 </div>
     

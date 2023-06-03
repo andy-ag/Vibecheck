@@ -1,7 +1,5 @@
 //! Script to monitor canvas operations
-// Adding divs based on form
 //TODO add layering for images - active image always first
-//TODO test browserify
 
 document.addEventListener('click', e => {
     let clicker = e.target.id
@@ -33,7 +31,7 @@ document.addEventListener('click', e => {
         break
         case submitName.id: {
           vibenameH1.innerText = vibenameInput.value
-          newVibe.name = vibenameInput.value
+          editVibe.name = vibenameInput.value
         }
     }
 })
@@ -41,15 +39,15 @@ document.addEventListener('click', e => {
 document.addEventListener('click', e => {
     let clicker = e.target.id
     if (clicker.startsWith('delete')) {
-      newVibe.removeItem(e.target)  
+      editVibe.removeItem(e.target)  
       deleteElement(getNumericId(e.target))
     }
 })
 
 document.addEventListener('click', e => {
     let clicker = e.target.id
-    if (clicker === 'save') {
-      saveVibe()
+    if (clicker === 'update') {
+      updateVibe()
     }
 })
 
@@ -63,7 +61,7 @@ const image = document.getElementById('image').id
 const text = document.getElementById('text').id
 const link = document.getElementById('link').id
 
-const saveUrl = '/vibes'
+const editUrl = `/vibes/${getIdFromURL(document.URL)}`
 
 const canvas = document.getElementById('canvas')
 const CANVAS_HEIGHT = canvas.style.height
@@ -80,12 +78,9 @@ const linkText = document.getElementById('link-text')
 const submitName = document.getElementById('vibename-submit')
 const vibenameInput = document.getElementById('vibename')
 const vibenameH1 = document.getElementById('vibename-h1')
+const templateTitle = document.getElementById('template-title')
 
-//TODO largest value of id needs to be retrieved, incremented 
-
-//TODO relative page position finder
-let idAssigner = 0
-
+//! Classes
 class Vibe{
   constructor(name) {
     this.name = name
@@ -120,19 +115,49 @@ class Item{
   }
 }
 
-newVibe = new Vibe('unnamed')
+//! Main 
+let idAssigner = getMaxId() + 1
+editVibe = new Vibe(getVibeName())
+populateVibe()
 
-async function saveVibe() {
-  newVibe.getValues()
+//! Functions
+function getIdFromURL(url) {
+  return url.split('vibes/')[1].slice(0,24)
+}
+
+function getMaxId() {
+  let max = 0
+  const items = canvas.childNodes
+  for (let i=0; i<items.length; i++) {
+    if (items[i].nodeType !== 1) continue
+    if (parseInt(items[i].id) > max) max = parseInt(items[i].id)
+  }
+  return max
+}
+
+function getVibeName() {
+  return templateTitle.innerText.split(' - editing')[0]
+}
+
+function populateVibe() {
+  const items = canvas.childNodes
+  for (let i=0; i<items.length; i++) {
+    if (items[i].nodeType !== 1) continue
+    editVibe.addItem(items[i])
+  }
+}
+
+async function updateVibe() {
+  editVibe.getValues()
   try {
-    const response = await fetch(saveUrl, {
-      method: "POST",
+    const response = await fetch(editUrl, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json"
       },
-      redirect: 'follow',
-      body: JSON.stringify(newVibe)
+      body: JSON.stringify(editVibe)
     })
+    console.log(response)
     if (response.redirected) {
       window.location.href = response.url;
   }
@@ -160,7 +185,7 @@ function addDiv() {
     textdiv.classList.add('textbox')
     element.appendChild(textdiv)
     textdiv.contentEditable = "true"
-    newVibe.addItem(element)
+    editVibe.addItem(element)
 }
 
 function togglePopup(popup) {
@@ -188,7 +213,7 @@ function addDiv_image() {
   let image = document.createElement('img')
   image.src = imgUrl.innerText.trim()
   element.appendChild(image)
-  newVibe.addItem(element)
+  editVibe.addItem(element)
 }
 
 function addLink() {
@@ -220,7 +245,7 @@ function addLink() {
   } else {
     link.innerText = linkUrl.innerText.trim()
   }
-  newVibe.addItem(element)
+  editVibe.addItem(element)
 }
 
 function deleteElement(id) {

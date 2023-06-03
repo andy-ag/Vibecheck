@@ -21,9 +21,14 @@
     <h1> <%= vibe.name %></h1>
     <button class="vibe-like">LIKE</button>
     <% if (user && user._id.toString() === vibeuser._id.toString()) { %>
-        <button class="vibe-edit">EDIT</button>
-        <button class="vibe-delete">DELETE</button>
-        <% } %>
+        <form action="/vibes/<%= vibe._id %>/edit" method="GET">
+            <button>EDIT</button>
+        </form>
+        <form action="/vibes/<%= vibe._id %>?_method=DELETE" method="POST">
+            <button>DELETE</button>
+        </form>
+        
+    <% } %>
     <div class="canvas">
         <% for (let item of vibe.items) { %>
             <%- item.content %>

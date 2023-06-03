@@ -3,6 +3,8 @@ const router = express.Router()
 const passport = require('passport')
 const authCtrl = require('../controllers/auth')
 
+//TODO move functions to controller for crispness
+
 // login page
 router.get('/auth', authCtrl.login)
 

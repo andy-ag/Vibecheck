@@ -17,8 +17,14 @@
         <a href="/">Home</a>
         <a href="/vibes">Browse</a>
         <a href="/vibes/new">New Vibe</a>
-        <a href="#">Account</a>
+      <% if (user) { %>
+        <a href="/users/<%= user._id %>">Account</a>
+      <% } else { %>
+        <a href="/auth/google">Account</a>
+      <% } %>
+        
+
         <a href="/auth/google">Login</a>
     </nav>
     <main>
-        <h2><%= title %></h1>
+        <h2 id="template-title"><%= title %></h1>

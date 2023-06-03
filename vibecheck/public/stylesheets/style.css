@@ -33,7 +33,6 @@ button, form {
 .drag {
   display: flex;
   justify-content: flex-end;
-  background: rgb(153 231 252);
   padding: 10px;
   z-index: 11;
 }

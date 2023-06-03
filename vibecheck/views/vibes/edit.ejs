@@ -1,0 +1,43 @@
+<!-- Board creation page -->
+<!-- Page cannot be accessed without being logged in -->
+<%- include('../partials/header') %>
+
+<script src="/javascripts/resizeDrag.js" defer></script>
+<script src="/javascripts/canvasEdit.js" defer></script>
+
+<form onkeydown="return event.key != 'Enter';">
+    <label>Change name?</label>
+    <!-- TODO pass current name here -->
+    <input type="text" id="vibename" maxlength="100">
+    <button id="vibename-submit" type="button">Update name</button>
+</form>
+<button id="image">Image</button>
+<button id="text">Text</button>
+<button id="link">Link</button>
+<!-- TODO pass current name here -->
+<h1 id="vibename-h1">Think of a name</h1>
+<div id="canvas">
+    <% for (let item of vibe.items) { %>
+        <%- item.content %>
+    <% } %>
+    </div>
+
+<button id="update">UPDATE</button>
+
+<div id="image-popup">
+    Provide url of image to be added
+    <div id="add-url" input type="text" contenteditable="true"></div>
+    <button id="cancel-image">Cancel</button>
+    <button id="submit-image">Add</button>
+</div>
+
+<div id="link-popup">
+    Provide url of link to be added
+    <div id="add-link" input type="text" contenteditable="true"></div>
+    (optional) provide text to display
+    <div id="link-text" input type="text" contenteditable="true"></div>
+    <button id="cancel-link">Cancel</button>
+    <button id="submit-link">Add</button>
+</div>
+
+<%- include('../partials/footer') %>
