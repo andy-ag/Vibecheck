@@ -1,17 +1,35 @@
 <!-- View user's boards, conditional option to delete if session = user -->
 <%- include('../partials/header') %>
 
-<a href="#">My vibes</a>
-<a href="#">Liked</a>
-<a href="/users/<%= user._id %>/settings">Settings</a>
+<% if (user && user._id.toString() === vibeuser._id.toString()) { %>
+    <a href="#">Your vibes</a>  
+    <a href="#">Liked</a>
+    <a href="/users/<%= user._id %>/settings">Settings</a>
+    <% } else { %> 
+        <a href="#">User's vibes</a>
+        <a href="#">Liked</a>
+    <% } %>
+        
 
+<% if (user && user._id.toString() === vibeuser._id.toString()) { %>
+    <h1>Your vibes</h1>
+    <% } else { %> 
+        <h1>Vibes by <%= vibeuser.name %></h1>
+        <% } %>
+<!-- TODO link edit and delete by parent's id -->
 <% for (let vibe of vibes) { %>
     <h1> <%= vibe.name %></h1>
+    <button class="vibe-like">LIKE</button>
+    <% if (user && user._id.toString() === vibeuser._id.toString()) { %>
+        <button class="vibe-edit">EDIT</button>
+        <button class="vibe-delete">DELETE</button>
+        <% } %>
     <div class="canvas">
         <% for (let item of vibe.items) { %>
             <%- item.content %>
         <% } %>
     </div>    
 <% } %>
+
 
 <%- include('../partials/footer') %>

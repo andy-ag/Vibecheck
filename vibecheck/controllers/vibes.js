@@ -6,7 +6,7 @@ const Vibe = require('../models/vibe')
 
 async function index (req, res) {
     try {
-        const vibes = await Vibe.find({}).sort({updatedAt: -1})
+        const vibes = await Vibe.find({}).sort({updatedAt: -1}).populate('user')
         res.render('vibes/index', { title: 'Latest vibes', vibes: vibes })
     } catch (error) {
         // think of best choice here to avoid infinite loop
@@ -18,9 +18,8 @@ async function index (req, res) {
 
 async function show (req, res) {
     try {
-        const vibe = await Vibe.findById(req.params.id)
-        const user = await User.findById(vibe.user)
-        res.render('vibes/show', { title: 'Vibe details', vibe: vibe, user: user })
+        const vibe = await Vibe.findById(req.params.id).populate('user')
+        res.render('vibes/show', { title: `${vibe.name} by ${vibe.user.name}`, vibe: vibe, user: res.locals.user})
     } catch (error) {
         console.log(error)
         res.redirect('/vibes')

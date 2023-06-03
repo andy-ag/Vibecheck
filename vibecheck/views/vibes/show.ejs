@@ -1,8 +1,14 @@
 <!-- View published board -->
 <%- include('../partials/header') %>
-
-<h1> <%= vibe.name %> by <%= user.name %> </h1>
-
+<div class="show-header">
+    <h1><%= vibe.name %> by <a target="_blank" href="/users/<%= vibe.user._id %>"><%= vibe.user.name %></a></h1>
+<button id="vibe-like">LIKE</button>
+   <% if (user && user._id.toString() === vibe.user._id.toString()) { %>
+        <button id="vibe-edit">EDIT</button>
+        <button id="vibe-delete">DELETE</button>
+    <% } %>
+</div>
+    
 <div id="canvas">
 <% for (let item of vibe.items) { %>
     <%- item.content %>

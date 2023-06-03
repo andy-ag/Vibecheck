@@ -1,9 +1,14 @@
 <!-- Browse feed, infinite scroll -->
 <%- include('../partials/header') %>
 
+
+
 <!-- TODO vibe must be scaled to viewer's monitor -->
 <% for (let vibe of vibes) { %>
-    <h1> <%= vibe.name %> by <%= user.name %> </h1>
+    <div class="index-header">
+    <h1><a target="_blank" href="/vibes/<%= vibe._id %>"><%= vibe.name %></a> by <a target="_blank" href="/users/<%= vibe.user._id %>"><%= vibe.user.name %></a></h1>
+    <button class="like">LIKE</button>
+    </div>
     <div class="canvas">
         <% for (let item of vibe.items) { %>
             <%- item.content %>
