@@ -48,7 +48,6 @@ async function create (req, res) {
 }
 
 async function remove (req, res) {
-    // Todo delete vibe from vibes/:id or users/:id/vibes
     try {
         const vibe = await Vibe.findById(req.params.id)
         const user = await User.findById(vibe.user._id)

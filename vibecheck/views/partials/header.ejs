@@ -20,11 +20,9 @@
       <% if (user) { %>
         <a href="/users/<%= user._id %>">Account</a>
       <% } else { %>
-        <a href="/auth/google">Account</a>
-      <% } %>
-        
-
         <a href="/auth/google">Login</a>
+      <% } %>
+
     </nav>
     <main>
         <h2 id="template-title"><%= title %></h1>

@@ -4,11 +4,11 @@
 const User = require('../models/user')
 const Vibe = require('../models/vibe')
 
-function settings (req, res) {
+function settings(req, res) {
     res.render('users/settings', { title: 'Settings'})
 }
 
-async function vibes (req, res) {
+async function vibes(req, res) {
     try {
         const user = await User.findById(req.params.id)
         const vibes = await Vibe.find({user: user._id}).sort({updatedAt: -1})
@@ -19,9 +19,21 @@ async function vibes (req, res) {
     }
 }
 
-//TODO add ability to delete from user page too
+async function deleteAccount(req, res) {
+    try {
+        const user = await User.findById(res.locals.user._id)
+        await Vibe.deleteMany({user: res.locals.user._id})
+        await user.deleteOne() 
+        req.method = 'GET'
+        res.redirect('/vibes')
+    } catch (error) {
+        console.log(error)
+        res.redirect('/vibes')
+    }
+}
 
 module.exports = {
     settings,
     vibes,
+    deleteAccount
 }

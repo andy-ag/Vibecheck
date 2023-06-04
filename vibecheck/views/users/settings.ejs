@@ -1,7 +1,11 @@
 <!-- Account deletion, other settings -->
 <%- include('../partials/header') %>
 
-<a href="/logout">Logout</a>
-<a href="#">Delete account</a>
+<form action="/logout" method="GET">
+    <button>Logout</button>
+</form>
+<form action="/users/<%= user._id %>?_method=DELETE" method="POST">
+    <button>Delete Account</button>
+</form>
 
 <%- include('../partials/footer') %>

@@ -8,4 +8,6 @@ router.get('/:id', usersCtrl.vibes)
 
 router.get('/:id/settings', usersCtrl.settings)
 
+router.delete('/:id', usersCtrl.deleteAccount)
+
 module.exports = router

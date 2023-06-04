@@ -2,7 +2,9 @@
 <%- include('../partials/header') %>
 <div class="show-header">
     <h1><%= vibe.name %> by <a href="/users/<%= vibe.user._id %>"><%= vibe.user.name %></a></h1>
-<button id="vibe-like">LIKE</button>
+    <% if (user) { %>
+        <button id="vibe-like">LIKE</button>
+    <% } %>
    <% if (user && user._id.toString() === vibe.user._id.toString()) { %>
         <form action="/vibes/<%= vibe._id %>/edit" method="GET">
             <button>EDIT</button>

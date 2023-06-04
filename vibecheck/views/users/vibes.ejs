@@ -19,7 +19,9 @@
 <!-- TODO link edit and delete by parent's id -->
 <% for (let vibe of vibes) { %>
     <h1> <%= vibe.name %></h1>
-    <button class="vibe-like">LIKE</button>
+    <% if (user) { %>
+        <button class="like">LIKE</button>
+    <% } %>
     <% if (user && user._id.toString() === vibeuser._id.toString()) { %>
         <form action="/vibes/<%= vibe._id %>/edit" method="GET">
             <button>EDIT</button>
