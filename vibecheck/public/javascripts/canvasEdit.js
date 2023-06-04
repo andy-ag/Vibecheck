@@ -117,7 +117,7 @@ class Item{
 
 //! Main 
 let idAssigner = getMaxId() + 1
-editVibe = new Vibe(getVibeName())
+editVibe = new Vibe(templateTitle)
 populateVibe()
 
 //! Functions
@@ -133,10 +133,6 @@ function getMaxId() {
     if (parseInt(items[i].id) > max) max = parseInt(items[i].id)
   }
   return max
-}
-
-function getVibeName() {
-  return templateTitle.innerText.split(' - editing')[0]
 }
 
 function populateVibe() {

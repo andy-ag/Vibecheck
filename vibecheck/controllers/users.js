@@ -12,7 +12,7 @@ async function vibes(req, res) {
     try {
         const user = await User.findById(req.params.id)
         const vibes = await Vibe.find({user: user._id}).sort({updatedAt: -1})
-        res.render('users/vibes', { title: `${user.name}'s Vibes`, vibeuser: user, vibes: vibes })
+        res.render('users/vibes', {vibeuser: user, vibes: vibes })
     } catch (error) {
         console.log(error)
         res.redirect('/vibes')

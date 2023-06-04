@@ -8,7 +8,7 @@ const Vibe = require('../models/vibe')
 async function index (req, res) {
     try {
         const vibes = await Vibe.find({}).sort({updatedAt: -1}).populate('user')
-        res.render('vibes/index', { title: 'Latest vibes', vibes: vibes })
+        res.render('vibes/index', {vibes: vibes })
     } catch (error) {
         // think of best choice here to avoid infinite loop
         // homepage should direct to /vibes/ 
@@ -20,7 +20,7 @@ async function index (req, res) {
 async function show (req, res) {
     try {
         const vibe = await Vibe.findById(req.params.id).populate('user')
-        res.render('vibes/show', { title: `${vibe.name} by ${vibe.user.name}`, vibe: vibe, user: res.locals.user})
+        res.render('vibes/show', {vibe: vibe, user: res.locals.user})
     } catch (error) {
         console.log(error)
         res.redirect('/vibes')
@@ -84,7 +84,7 @@ async function edit (req, res) {
     try {
         const vibe = await Vibe.findById(req.params.id).populate('user')
         if (vibe.user._id.toString() !== res.locals.user._id.toString()) return res.redirect('/vibes')
-        res.render('vibes/edit', { title: `${vibe.name} - editing`, vibe: vibe})
+        res.render('vibes/edit', {vibe: vibe})
     } catch (error) {
         console.log(error)
         res.redirect('/vibes')

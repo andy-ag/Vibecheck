@@ -1,20 +1,31 @@
 <%- include('./partials/headerHome') %>
+<script src="/javascripts/indexStyling.js" defer></script>
 
-<h1>PLACEHOLDER IMAGE</h1>
-<p>Donec lacinia purus dui, ac lobortis augue ultricies quis. Nulla molestie metus sit 
-  amet justo luctus rutrum. Donec sagittis est quis eleifend porta. Etiam hendrerit, nibh
-   sed fringilla ullamcorper, neque arcu iaculis est, ac viverra ipsum turpis ut metus. Etiam 
-   auctor dictum diam, nec tincidunt enim. Nunc risus orci, laoreet ac felis laoreet, condimentum 
-   ultricies purus. Donec tincidunt nulla vitae venenatis ullamcorper. Curabitur lacinia elit 
-   nec mi interdum accumsan. Vivamus ullamcorper lorem pulvinar varius pulvinar. Vivamus id justo 
-   commodo, commodo lorem non, scelerisque diam. Etiam efficitur egestas aliquet. 
-   Vestibulum lacus elit, sodales vel feugiat in, egestas ac lacus. Nam in neque ornare, 
-   iaculis nisl ac, sodales risus. Mauris laoreet, neque at fringilla tempor, nunc enim porta sapien, 
-   quis consequat leo tortor id eros. Nulla eu tortor justo.
-</p>
+<h1 id="home-vibecheck">VIBECHECK</h1>
+<div id="homepage-wrapper">
+  <div id="homepage-textbox">
+    <p id="intro-text">Donec lacinia purus dui, ac lobortis augue ultricies quis. Nulla molestie metus sit 
+      amet justo luctus rutrum. Donec sagittis est quis eleifend porta. Etiam hendrerit, nibh
+      sed fringilla ullamcorper, neque arcu iaculis est, ac viverra ipsum turpis ut metus. Etiam 
+      auctor dictum diam, nec tincidunt enim. Nunc risus orci, laoreet ac felis laoreet, condimentum 
+      ultricies purus. Donec tincidunt nulla vitae venenatis ullamcorper. Curabitur lacinia elit 
+      nec mi interdum accumsan. Vivamus ullamcorper lorem pulvinar varius pulvinar. Vivamus id justo 
+      commodo, commodo lorem non, scelerisque diam. Etiam efficitur egestas aliquet. 
+      Vestibulum lacus elit, sodales vel feugiat in, egestas ac lacus. Nam in neque ornare, 
+      iaculis nisl ac, sodales risus. Mauris laoreet, neque at fringilla tempor, nunc enim porta sapien, 
+      quis consequat leo tortor id eros. Nulla eu tortor justo.
+    </p>
+    <form id="signup-home" action="/auth" method="GET">
+      <button type="submit">Sign up / Log in</button>
+    </form>
+    <img id = "landing-background">
+  </div>
+</div>
+    
 
-<form id="signup-home" action="/auth" method="GET">
-  <button type="submit">Sign up / Log in</button>
-</form>
+
+
+
+
 
 <%- include('./partials/footer') %>

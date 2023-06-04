@@ -12,11 +12,14 @@
         
 
 <% if (user && user._id.toString() === vibeuser._id.toString()) { %>
-    <h1>Your vibes</h1>
+    <h1>Your vibes</h1> 
     <% } else { %> 
         <h1>Vibes by <%= vibeuser.name %></h1>
         <% } %>
 <!-- TODO link edit and delete by parent's id -->
+<% if (vibes.length === 0) { %>
+    <h2>Looks like there's nothing here! Don't be shy, create a vibe of your own</h2>
+    <% } %>
 <% for (let vibe of vibes) { %>
     <h1> <%= vibe.name %></h1>
     <% if (user) { %>
