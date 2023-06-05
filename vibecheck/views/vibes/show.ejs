@@ -1,9 +1,15 @@
 <!-- View published board -->
 <%- include('../partials/header') %>
-<div class="show-header">
-    <h1><%= vibe.name %> by <a href="/users/<%= vibe.user._id %>"><%= vibe.user.name %></a></h1>
+<main>
+<div class="canvas-box">
+    <div class="namebox">
+    <h3><%= vibe.name %> by <a href="/users/<%= vibe.user._id %>"><%= vibe.user.name %></a></h3>
+</div>
+    <div class="buttons">
     <% if (user) { %>
-        <button id="vibe-like">LIKE</button>
+        <form action="/vibes/<%= vibe._id %>/like?_method=PUT" method="POST">
+            <button>LIKE</button>
+        </form>
     <% } %>
    <% if (user && user._id.toString() === vibe.user._id.toString()) { %>
         <form action="/vibes/<%= vibe._id %>/edit" method="GET">
@@ -13,13 +19,16 @@
             <button>DELETE</button>
         </form>
         
+        <% } %>
+    </div>
+
+<div id="canvas">
+    <% for (let item of vibe.items) { %>
+        <%- item.content %>
     <% } %>
+    </div>
 </div>
     
-<div id="canvas">
-<% for (let item of vibe.items) { %>
-    <%- item.content %>
-<% } %>
-</div>
+
 
 <%- include('../partials/footer') %>

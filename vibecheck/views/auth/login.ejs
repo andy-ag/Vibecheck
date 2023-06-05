@@ -1,5 +1,6 @@
 <!-- Login / sign-up page -->
 <!-- todo add authentication failed notification -->
+<main>
 <%- include('../partials/header') %>
 
 <!-- <form id="signup-form" action="/auth/form" method="POST">
@@ -7,8 +8,11 @@
     <input type="text" name="username">
     <input type="submit" value="Sign up with Google">
 </form> -->
-
+<div class="wrapper">
+<div id="auth-box">
 <a href="/auth/google">Sign up with Google</a>
 <a href="/auth/google">Log in with Google</a>
+</div>
+</div>
 
 <%- include('../partials/footer') %>

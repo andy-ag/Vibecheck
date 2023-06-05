@@ -10,12 +10,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Exo:wght@300&family=VT323&display=swap" rel="stylesheet">
+  <script src="/javascripts/bannerStyling.js" defer></script>
 </head>
 <body>
+  <div id="banner">
+    <h1 id="vibecheck">VIBECHECK</h1>
     <nav>
         <a href="/">Home</a>
         <a href="/vibes">Browse</a>
-        <a href="/vibes/new">New Vibe</a>
+        <a href="/vibes/new">Add Vibe</a>
       <% if (user) { %>
         <a href="/users/<%= user._id %>">Account</a>
       <% } else { %>
@@ -23,4 +26,4 @@
       <% } %>
 
     </nav>
-    <main>
+  </div>

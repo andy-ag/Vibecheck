@@ -11,7 +11,7 @@ router.get('/', vibesCtrl.index)
 // new
 router.get('/new', isLoggedIn, vibesCtrl.new)
 
-//edit
+// edit
 router.get('/:id/edit', vibesCtrl.edit)
 
 // show
@@ -25,6 +25,13 @@ router.delete('/:id', vibesCtrl.remove)
 
 // update
 router.put('/:id', vibesCtrl.update)
+
+// like
+router.put('/:id/like', vibesCtrl.like)
+
+// unlike 
+router.put('/:id/unlike', vibesCtrl.unlike)
+
 
 
 module.exports = router

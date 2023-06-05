@@ -1,29 +1,35 @@
 <!-- Board creation page -->
 <!-- Page cannot be accessed without being logged in -->
 <%- include('../partials/header') %>
+<main>
 
 <script src="/javascripts/resizeDrag.js" defer></script>
 <script src="/javascripts/canvasEdit.js" defer></script>
 
+<div class="canvas-box">
+    <div class="namebox">
 <form onkeydown="return event.key != 'Enter';">
-    <label>Change name?</label>
-    <!-- TODO pass current name here -->
-    <input type="text" id="vibename" maxlength="100">
+    <input type="text" id="vibename" maxlength="100" value="<%= vibe.name %>">
     <button id="vibename-submit" type="button">Update name</button>
 </form>
+<h1 id="template-title"><%= vibe.name %></h1>
+<h1 id="vibename-h1"></h1>
+</div>
+
+<div class="buttons">
 <button id="image">Image</button>
 <button id="text">Text</button>
 <button id="link">Link</button>
-<!-- TODO pass current name here -->
-<h1 id="template-title"><%= vibe.name %></h1>
-<h1 id="vibename-h1"></h1>
+<button id="toggle-headers">Toggle headers</button>
+<button id="update">UPDATE</button>
+</div>
+
 <div id="canvas">
     <% for (let item of vibe.items) { %>
         <%- item.content %>
     <% } %>
     </div>
-
-<button id="update">UPDATE</button>
+</div>
 
 <div id="image-popup">
     Provide url of image to be added

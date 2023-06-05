@@ -1,30 +1,33 @@
 <!-- Browse feed, infinite scroll -->
 <%- include('../partials/header') %>
-
+<main>
 
 
 <!-- TODO vibe must be scaled to viewer's monitor -->
 <% for (let vibe of vibes) { %>
-    <div class="index-header">
-    <h1><a href="/vibes/<%= vibe._id %>"><%= vibe.name %></a> by <a href="/users/<%= vibe.user._id %>"><%= vibe.user.name %></a></h1>
-    <% if (user) { %>
+<div class="canvas-box">
+    <div class="namebox">
+        <h3><a href="/vibes/<%= vibe._id %>"><%= vibe.name %></a> by <a href="/users/<%= vibe.user._id %>"><%= vibe.user.name %></a></h3>
+    </div>
+    <div class="buttons">
+        <% if (user) { %>
         <button class="like">LIKE</button>
-    <% } %>
-    <% if (user && user._id.toString() === vibe.user._id.toString()) { %>
+        <% } %>
+        <% if (user && user._id.toString() === vibe.user._id.toString()) { %>
         <form action="/vibes/<%= vibe._id %>/edit" method="GET">
             <button>EDIT</button>
         </form>
         <form action="/vibes/<%= vibe._id %>?_method=DELETE" method="POST">
             <button>DELETE</button>
         </form>
-        
-    <% } %>
+        <% } %>
     </div>
     <div class="canvas">
         <% for (let item of vibe.items) { %>
             <%- item.content %>
         <% } %>
-    </div>    
+    </div>  
+</div>  
 <% } %>
 
 <%- include('../partials/footer') %>

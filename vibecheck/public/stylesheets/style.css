@@ -1,7 +1,3 @@
-/* * {
-  border: solid black 1px;
-} */
-
 html {
   margin: 0;
 }
@@ -14,13 +10,40 @@ body {
   box-sizing: border-box;
 }
 
-main {
+.namebox {
+  width: 1500px;
+  margin-top: 15px;
+  height: 50px;
   display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 25px;
+}
+
+main {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.canvas-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.buttons {
+  width: 1500px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  padding-top: 5px;
+  padding-bottom: 10px;
 }
 
 nav {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   gap: 20px;
   padding-left: 100px;
   padding-right: 100px;
@@ -30,20 +53,71 @@ nav {
   margin-top: 65px; 
   margin-left: auto; 
   margin-right: auto; 
-  width: 180px;
+  width: 500px;
+}
+
+#account-nav {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 15px;
+  padding-left: 100px;
+  padding-right: 100px;
+  position: absolute;
+  left: 0; 
+  right: 0;
+  margin-top: 10px;
+  margin-left: auto; 
+  margin-right: auto; 
+  width: 500px;
 }
 
 a {
   font-size: 20px;
   text-decoration: none;
-  color: white;
+  color: black; 
   background-color: rgba(0,0,0,.05);
   padding: 0 2px 0 2px;
   border-radius: 5px;
 }
 
+nav>a{
+  color:white;
+}
+
+
+
 a:hover {
   color: rgb(187, 186, 255);
+}
+
+h3 {
+  font-size: 20px;
+}
+
+#userpage-header {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+
+.wrapper{
+  display: flex;
+  justify-content: center;
+}
+
+#auth-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+  width: 280px;
+  gap: 10px;
+}
+
+#auth-box>a {
+  font-size: 30px;
 }
 
 #landing-background{
@@ -75,14 +149,14 @@ button, form {
   font-family: 'Exo', sans-serif;
 }
 
-#home-vibecheck {
+#vibecheck {
+  margin-top: 17px;
   border-radius: 5px;
   text-align: center;
   color:white;
   position: absolute;
   left: 0; 
   right: 0;
-  margin-top: -83px; 
   margin-left: auto; 
   margin-right: auto; 
   width: 180px;
@@ -104,8 +178,7 @@ button, form {
 }
 
 .text, .link {
-  border: solid black 1px;
-  height: 200px;
+  height: 60px;
   width: 200px;
   position: absolute;
   overflow: auto;
@@ -120,16 +193,38 @@ button, form {
   z-index: 10;
 }
 
-.drag {
+.header {
   display: flex;
   justify-content: flex-end;
-  padding: 10px;
+  height: 25px;
   z-index: 11;
+  visibility: 'visible';
 }
 
 .textbox {
-  border: solid red 1px;
-  height: 80%
+  height: 80%;
+  border: solid rgb(217,217,217) 3px;
+  border-radius: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 2px;
+}
+
+.linkbox {
+  text-align: center;
+  border-radius: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 2px;
+}
+
+.link>a {
+  text-align: center;
+}
+
+.drag-resize {
+  display: flex;
+  flex-direction: column;
 }
 
 #image-popup, #link-popup {
@@ -158,8 +253,23 @@ button, form {
 
 #canvas, .canvas {
   position: relative;
+  border-radius: 10px;
   height: 800px;
   width: 1500px;
-  border: solid black 1px;
+  border: solid rgb(217,217,217) 3px;
   margin-bottom: 50px;
+}
+
+input[type="text"]
+{
+  font-family: 'Exo', sans-serif;
+}
+
+#settings-box {
+  margin-top: 10px;
+  gap: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

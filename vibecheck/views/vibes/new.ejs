@@ -1,22 +1,30 @@
 <!-- Board creation page -->
 <!-- Page cannot be accessed without being logged in -->
 <%- include('../partials/header') %>
+<main>
 
 <script src="/javascripts/resizeDrag.js" defer></script>
 <script src="/javascripts/canvas.js" defer></script>
 
-<form onkeydown="return event.key != 'Enter';">
-    <label>What's the vibe?</label>
-    <input type="text" id="vibename" maxlength="100">
-    <button id="vibename-submit" type="button">Update name</button>
-</form>
+
+
+<div class="canvas-box">
+    <div class="namebox">
+        <form onkeydown="return event.key != 'Enter';">
+            <input type="text" id="vibename" maxlength="100">
+            <button id="vibename-submit" type="button">Update name</button>
+        </form>
+        <h1 id="vibename-h1">What's the vibe?</h1>
+        </div>    
+    <div class="buttons">
 <button id="image">Image</button>
 <button id="text">Text</button>
 <button id="link">Link</button>
-<h1 id="vibename-h1">Think of a name</h1>
-<div id="canvas"></div>
-
+<button id="toggle-headers">Toggle headers</button>
 <button id="save">SAVE</button>
+    </div>
+<div id="canvas"></div>
+</div>
 
 <div id="image-popup">
     Provide url of image to be added

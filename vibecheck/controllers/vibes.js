@@ -1,17 +1,13 @@
 //! Manages control flow for vibe-related actions
-//Todo write controllers
-//Todo export titles
 const user = require('../models/user')
 const User = require('../models/user')
 const Vibe = require('../models/vibe')
 
 async function index (req, res) {
     try {
-        const vibes = await Vibe.find({}).sort({updatedAt: -1}).populate('user')
+        const vibes = await Vibe.find({}).sort({createdAt: -1}).populate('user')
         res.render('vibes/index', {vibes: vibes })
     } catch (error) {
-        // think of best choice here to avoid infinite loop
-        // homepage should direct to /vibes/ 
         console.log(error)
         res.redirect('/')
     }
@@ -32,7 +28,6 @@ function newVibe (req, res) {
 }
 
 async function create (req, res) {
-    // Todo save vibe created on vibes/new page
     try {
         req.body.user = req.user._id;
         const user = await User.findById(req.user._id)
@@ -80,6 +75,35 @@ async function update (req, res) {
     }
 }
 
+async function like (req, res) {
+    try {
+        const vibe = await Vibe.findById(req.params.id)
+        const user = await User.findById(res.locals.user._id)
+        vibe.likedBy.unshift(user._id)
+        await vibe.save()
+        user.likedVibes.unshift(vibe._id)
+        await user.save() 
+        req.method = 'GET'
+        res.redirect(`/vibes/${vibe._id}`)
+        }
+    catch (error) {
+        console.log(error)
+        res.redirect(`/vibes/${vibe._id}`)
+    }
+}
+
+async function unlike (req, res) {
+    try {
+        const vibe = await Vibe.findById(req.params.id)
+        const user = await User.findById(res.locals.user._id)
+        await Vibe.findByIdAndUpdate(vibe._id, {$pull: {likedBy: user._id}})
+        await User.findByIdAndUpdate(user._id, {$pull: {likedVibes: vibe._id}})
+    } catch (error) {
+        console.log(error)
+        res.redirect('/vibes')
+    }
+}
+
 async function edit (req, res) {
     try {
         const vibe = await Vibe.findById(req.params.id).populate('user')
@@ -98,5 +122,7 @@ module.exports = {
     create,
     remove,
     update,
-    edit
+    edit,
+    like,
+    unlike
 }

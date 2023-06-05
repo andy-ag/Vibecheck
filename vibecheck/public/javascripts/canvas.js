@@ -49,8 +49,15 @@ document.addEventListener('click', e => {
 document.addEventListener('click', e => {
     let clicker = e.target.id
     if (clicker === 'save') {
+      makeTextNonEditable()
       saveVibe()
     }
+})
+
+document.addEventListener('click', e => {
+  if (e.target.id === 'toggle-headers') {
+    toggleHeaders()
+  }
 })
 
 //TODO Check: can viewwindow fit full canvas? If so, display normal
@@ -150,7 +157,8 @@ function addDiv() {
     canvas.appendChild(element)
     let header = document.createElement('div')
     header.id = `${element.id}header`
-    header.classList.add('drag')
+    header.classList.add('header')
+    header.style.visibility = 'visible'
     element.appendChild(header)
     let button = document.createElement('button')
     button.id = `delete${element.id}`
@@ -180,6 +188,8 @@ function addDiv_image() {
   canvas.appendChild(element)
   let header = document.createElement('div')
   header.id = `${element.id}header`
+  header.classList.add('header')
+  header.style.visibility = 'visible'
   element.appendChild(header)
   let button = document.createElement('button')
   button.id = `delete${element.id}`
@@ -200,7 +210,8 @@ function addLink() {
   canvas.appendChild(element)
   let header = document.createElement('div')
   header.id = `${element.id}header`
-  header.classList.add('drag')
+  header.classList.add('header')
+  header.style.visibility = 'visible'
   element.appendChild(header)
   let button = document.createElement('button')
   button.id = `delete${element.id}`
@@ -208,7 +219,7 @@ function addLink() {
   header.appendChild(button)
   let link = document.createElement('a')
   link.target = '_blank'
-  link.classList.add('textbox')
+  link.classList.add('linkbox')
   element.appendChild(link)
   if (linkUrl.innerText.trim().includes('http')) {
     link.href = linkUrl.innerText.trim()
@@ -229,4 +240,23 @@ function deleteElement(id) {
 
 function getNumericId(element) {
   return element.id.replace(/\D/g, '')
+}
+
+function toggleHeaders() {
+  const headers = document.getElementsByClassName('header')
+  for (let i=0; i<headers.length; i++) {
+    if (headers[i].style.visibility === 'visible') {
+      headers[i].style.visibility = 'hidden'
+    } else {
+      headers[i].style.visibility = 'visible'
+    }
+  }
+}
+
+function makeTextNonEditable() {
+  const textDivs = document.getElementsByClassName('text')
+  for (let i=0; i<textDivs.length; i++) {
+    console.log(textDivs[i])
+    textDivs[i].lastChild.contentEditable = 'false'
+  }
 }
