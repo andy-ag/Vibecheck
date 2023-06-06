@@ -1,38 +1,49 @@
 <!-- View user's boards, conditional option to delete if session = user -->
 <%- include('../partials/header') %>
 <main>
+<title>User vibes</title>
 
 <div id="account-nav">
-<% if (user && user._id.toString() === vibeuser._id.toString()) { %>
+<% if (user && user._id.toString() === vUser._id.toString()) { %>
     <a href="#">Your vibes</a>  
-    <a href="#">Liked</a>
+    <a href="/users/<%= vUser._id %>/liked">Liked</a>
     <a href="/users/<%= user._id %>/settings">Settings</a>
     <% } else { %> 
         <a href="#">User's vibes</a>
-        <a href="#">Liked</a>
+        <a href="/users/<%= vUser._id %>/liked">Liked</a>
     <% } %>
 </div>       
 
 <div id="userpage-header">
-    <% if (user && user._id.toString() === vibeuser._id.toString()) { %>
-    <h1>Your vibes</h1> 
+    <% if (user && user._id.toString() === vUser._id.toString()) { %>
+        <h1>Your vibes</h1> 
     <% } else { %> 
-        <h1>Vibes by <%= vibeuser.name %></h1>
-    <% } %>
-    <% if (vibes.length === 0) { %>
-    <br>
-        <h2>Looks like there's nothing here! Don't be shy, create a vibe of your own</h2>
+        <h1>Vibes by <%= vUser.name %></h1>
     <% } %>
 </div>
+    <% if (vibes.length === 0) { %>
+     <h2 id="shy">Looks like there's nothing here!</h2>
+    <% } %>
 
 <% for (let vibe of vibes) { %>
 <div class="canvas-box">
     <div class="namebox">
         <a href="/vibes/<%= vibe._id %>"><%= vibe.name %></a>
         <% if (user) { %>
-        <button class="like">LIKE</button>
+            <% if (vibe.likedBy.indexOf(user._id) === -1) { %>
+            <form action="/vibes/<%= vibe._id %>/like?_method=PUT" method="POST">
+                <button>LIKE</button>
+            </form>
+            <% } else { %>
+            <form action="/vibes/<%= vibe._id %>/like?_method=PUT" method="POST">
+                <button>UNLIKE</button>
+            </form>
+            <% } %>
+            <form action="/vibes/<%= vibe._id %>/clone" method="GET">
+                <button>CLONE</button>
+            </form>
         <% } %>
-        <% if (user && user._id.toString() === vibeuser._id.toString()) { %>
+        <% if (user && user._id.toString() === vibe.user._id.toString()) { %>
         <form action="/vibes/<%= vibe._id %>/edit" method="GET">
             <button>EDIT</button>
         </form>
@@ -48,6 +59,5 @@
     </div>  
 </div>       
 <% } %>
-
 
 <%- include('../partials/footer') %>

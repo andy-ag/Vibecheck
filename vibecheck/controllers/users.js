@@ -11,8 +11,8 @@ function settings(req, res) {
 async function vibes(req, res) {
     try {
         const user = await User.findById(req.params.id)
-        const vibes = await Vibe.find({user: user._id}).sort({updatedAt: -1})
-        res.render('users/vibes', {vibeuser: user, vibes: vibes })
+        const vibes = await Vibe.find({user: user._id}).sort({createdAt: -1})
+        res.render('users/vibes', {vibes: vibes, vUser: user })
     } catch (error) {
         console.log(error)
         res.redirect('/vibes')
@@ -22,6 +22,11 @@ async function vibes(req, res) {
 async function deleteAccount(req, res) {
     try {
         const user = await User.findById(res.locals.user._id)
+        const likedVibes = await Vibe.find({likedBy: res.locals.user._id})
+        for (let i=0; i<likedVibes.length; i++) {
+            likedVibes[i].likedBy.pull(res.locals.user._id)
+            await likedVibes[i].save()
+        }
         await Vibe.deleteMany({user: res.locals.user._id})
         await user.deleteOne() 
         req.method = 'GET'
@@ -32,8 +37,20 @@ async function deleteAccount(req, res) {
     }
 }
 
+async function liked (req, res) {
+    try {
+        const user = await User.findById(req.params.id)
+        const vibes = await Vibe.find({likedBy: user._id}).populate('user').sort({createdAt: -1})
+        res.render('users/liked', {vibes: vibes, vUser: user})
+    } catch (error) {
+        console.log(error)
+        res.redirect(`/users/${res.locals.user._id}`)
+    }
+}
+
 module.exports = {
     settings,
     vibes,
-    deleteAccount
+    deleteAccount,
+    liked
 }

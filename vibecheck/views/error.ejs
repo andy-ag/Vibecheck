@@ -1,6 +1,13 @@
-<h1>The vibes are off..</h1>
-<h2><%= message %></h1>
-<h3><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<%- include('./partials/header') %>
+<title>Oops..</title>
+
+<div class="wrapper">
+    <div class="wrapper-col">
+        <h1 style="margin-top: 35px">The vibes are off :&#40;</h1>
+        <h1 style="margin-top: -20px"><%= message %> - <%= error.status %></h1>
+        <img id="error-background" src="https://cdn.discordapp.com/attachments/1093240258302324878/1115572453725438012/andy_agv_retro_cyberpunk_computer_displaying_a_fullscreen_sad_f_b29030bb-c1be-4ad5-ac0b-22c2aead5986.png">
+        <pre><%= error.stack %></pre>
+    </div>
+</div>
 
 <%- include('./partials/footer') %>

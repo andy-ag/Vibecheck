@@ -1,7 +1,5 @@
 //! Script to monitor canvas operations
-// Adding divs based on form
 //TODO add layering for images - active image always first
-//TODO test browserify
 
 document.addEventListener('click', e => {
     let clicker = e.target.id
@@ -33,7 +31,7 @@ document.addEventListener('click', e => {
         break
         case submitName.id: {
           vibenameH1.innerText = vibenameInput.value
-          newVibe.name = vibenameInput.value
+          editVibe.name = vibenameInput.value
         }
     }
 })
@@ -41,24 +39,22 @@ document.addEventListener('click', e => {
 document.addEventListener('click', e => {
     let clicker = e.target.id
     if (clicker.startsWith('delete')) {
-      newVibe.removeItem(e.target)  
+      editVibe.removeItem(e.target)  
       deleteElement(getNumericId(e.target))
     }
 })
 
 document.addEventListener('click', e => {
     let clicker = e.target.id
-    if (clicker === 'save') {
+    if (clicker === 'update') {
       makeTextNonEditable()
       headersOff()
       saveVibe()
     }
 })
 
-document.addEventListener('click', e => {
-  if (e.target.id === 'toggle-headers') {
-    toggleHeaders()
-  }
+document.addEventListener('click', e =>{
+  if (e.target.id === 'toggle-headers') toggleHeaders()
 })
 
 //TODO Check: can viewwindow fit full canvas? If so, display normal
@@ -71,7 +67,7 @@ const image = document.getElementById('image').id
 const text = document.getElementById('text').id
 const link = document.getElementById('link').id
 
-const saveUrl = '/vibes'
+const saveUrl = `/vibes`
 
 const canvas = document.getElementById('canvas')
 const CANVAS_HEIGHT = canvas.style.height
@@ -88,12 +84,9 @@ const linkText = document.getElementById('link-text')
 const submitName = document.getElementById('vibename-submit')
 const vibenameInput = document.getElementById('vibename')
 const vibenameH1 = document.getElementById('vibename-h1')
+const templateTitle = document.getElementById('template-title')
 
-//TODO largest value of id needs to be retrieved, incremented 
-
-//TODO relative page position finder
-let idAssigner = 0
-
+//! Classes
 class Vibe{
   constructor(name) {
     this.name = name
@@ -128,25 +121,53 @@ class Item{
   }
 }
 
-newVibe = new Vibe('unnamed')
+//! Main 
+let idAssigner = getMaxId() + 1
+editVibe = new Vibe(templateTitle.innerText)
+populateVibe()
+headersOn()
+makeTextEditable()
+
+//! Functions
+function getIdFromURL(url) {
+  return url.split('vibes/')[1].slice(0,24)
+}
+
+function getMaxId() {
+  let max = 0
+  const items = canvas.childNodes
+  for (let i=0; i<items.length; i++) {
+    if (items[i].nodeType !== 1) continue
+    if (parseInt(items[i].id) > max) max = parseInt(items[i].id)
+  }
+  return max
+}
+
+function populateVibe() {
+  const items = canvas.childNodes
+  for (let i=0; i<items.length; i++) {
+    if (items[i].nodeType !== 1) continue
+    editVibe.addItem(items[i])
+  }
+}
 
 async function saveVibe() {
-  newVibe.getValues()
-  try {
-    const response = await fetch(saveUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      redirect: 'follow',
-      body: JSON.stringify(newVibe)
-    })
-    if (response.redirected) {
-      window.location.href = response.url;
-  }
-  } catch (error) {
-      console.log(error)
-  }
+    editVibe.getValues()
+    try {
+      const response = await fetch(saveUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        redirect: 'follow',
+        body: JSON.stringify(editVibe)
+      })
+      if (response.redirected) {
+        window.location.href = response.url;
+    }
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 function addDiv() {
@@ -169,7 +190,7 @@ function addDiv() {
     textdiv.classList.add('textbox')
     element.appendChild(textdiv)
     textdiv.contentEditable = "true"
-    newVibe.addItem(element)
+    editVibe.addItem(element)
 }
 
 function togglePopup(popup) {
@@ -199,7 +220,7 @@ function addDiv_image() {
   let image = document.createElement('img')
   image.src = imgUrl.innerText.trim()
   element.appendChild(image)
-  newVibe.addItem(element)
+  editVibe.addItem(element)
 }
 
 function addLink() {
@@ -232,7 +253,7 @@ function addLink() {
   } else {
     link.innerText = linkUrl.innerText.trim()
   }
-  newVibe.addItem(element)
+  editVibe.addItem(element)
 }
 
 function deleteElement(id) {
@@ -254,10 +275,16 @@ function toggleHeaders() {
   }
 }
 
+function makeTextEditable() {
+  const textDivs = document.getElementsByClassName('text')
+  for (let i=0; i<textDivs.length; i++) {
+    textDivs[i].lastChild.contentEditable = 'true'
+  }
+}
+
 function makeTextNonEditable() {
   const textDivs = document.getElementsByClassName('text')
   for (let i=0; i<textDivs.length; i++) {
-    console.log(textDivs[i])
     textDivs[i].lastChild.contentEditable = 'false'
   }
 }

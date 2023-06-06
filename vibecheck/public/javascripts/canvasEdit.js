@@ -48,6 +48,7 @@ document.addEventListener('click', e => {
     let clicker = e.target.id
     if (clicker === 'update') {
       makeTextNonEditable()
+      headersOff()
       updateVibe()
     }
 })
@@ -124,6 +125,7 @@ class Item{
 let idAssigner = getMaxId() + 1
 editVibe = new Vibe(templateTitle.innerText)
 populateVibe()
+headersOn()
 makeTextEditable()
 
 //! Functions
@@ -284,5 +286,19 @@ function makeTextNonEditable() {
   const textDivs = document.getElementsByClassName('text')
   for (let i=0; i<textDivs.length; i++) {
     textDivs[i].lastChild.contentEditable = 'false'
+  }
+}
+
+function headersOff() {
+  const headers = document.getElementsByClassName('header')
+  for (let i=0; i<headers.length; i++) {
+    headers[i].style.visibility = 'hidden'
+  }
+}
+
+function headersOn() {
+  const headers = document.getElementsByClassName('header')
+  for (let i=0; i<headers.length; i++) {
+    headers[i].style.visibility = 'visible'
   }
 }

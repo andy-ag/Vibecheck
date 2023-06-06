@@ -11,13 +11,15 @@ function callback(req, res, next) {
     passport.authenticate(
         'google',
         {
-          successRedirect: req.session.originalUrl || '/vibes',
+          successRedirect: req.session.originalUrl || req.session.ref || '/vibes',
           failureRedirect: '/auth/login',
         }
     )(req, res, next)
 }
 
 function login(req, res, next) {
+    const referer = req.headers.referer
+    req.session.ref = referer
     passport.authenticate('google', {
         scope: ['profile', 'email'],
       })(req, res, next)

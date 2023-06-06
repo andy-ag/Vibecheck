@@ -2,10 +2,10 @@
 <!-- Page cannot be accessed without being logged in -->
 <%- include('../partials/header') %>
 <script src="/javascripts/resizeDrag.js" defer></script>
-<script src="/javascripts/canvasEdit.js" defer></script>
+<script src="/javascripts/canvasClone.js" defer></script>
 
 <main>
-<title>Editing <%= vibe.name %></title>
+<title>Cloning <%= vibe.name %></title>
 
 <div class="canvas-box">
     <div class="namebox">
@@ -22,7 +22,7 @@
         <button id="text">Text</button>
         <button id="link">Link</button>
         <button id="toggle-headers">Toggle headers</button>
-        <button id="update">UPDATE</button>
+        <button id="update">SAVE</button>
     </div>
 
         <div id="canvas">
@@ -49,7 +49,5 @@
             <% } %>
     </div>
 </div>
-
-
 
 <%- include('../partials/footer') %>

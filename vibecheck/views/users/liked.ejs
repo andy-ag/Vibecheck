@@ -1,0 +1,64 @@
+<!-- View user's boards, conditional option to delete if session = user -->
+<%- include('../partials/header') %>
+<main>
+<title>Liked vibes</title>
+
+<div id="account-nav">
+<% if (user && user._id.toString() === vUser._id.toString()) { %>
+    <a href="/users/<%= vUser._id %>">Your vibes</a>  
+    <a href="/users/<%= vUser._id %>/liked">Liked</a>
+    <a href="/users/<%= user._id %>/settings">Settings</a>
+    <% } else { %> 
+        <a href="/users/<%= vUser._id %>">User's vibes</a>
+        <a href="#">Liked</a>
+    <% } %>
+</div>       
+
+<div id="userpage-header">
+    <% if (user && user._id.toString() === vUser._id.toString()) { %>
+        <h1>Your liked vibes</h1> 
+    <% } else { %> 
+        <h1>Liked by <%= vUser.name %></h1>
+    <% } %>
+</div>
+    <% if (vibes.length === 0) { %>
+        <h2 id="shy">Looks like there's nothing here!</h2>
+    <% } %>
+    
+    <% for (let vibe of vibes) { %>
+        <div class="canvas-box">
+            <div class="namebox">
+                <h3><a href="/vibes/<%= vibe._id %>"><%= vibe.name %></a> by <a href="/users/<%= vibe.user._id %>"><%= vibe.user.name %></a></h3>
+            </div>
+            <div class="buttons">
+                <% if (user) { %>
+                    <% if (vibe.likedBy.indexOf(user._id) === -1) { %>
+                        <form action="/vibes/<%= vibe._id %>/like?_method=PUT" method="POST">
+                            <button>LIKE</button>
+                        </form>
+                        <% } else { %>
+                        <form action="/vibes/<%= vibe._id %>/like?_method=PUT" method="POST">
+                         <button>UNLIKE</button>
+                        </form>
+                    <% } %>
+                    <form action="/vibes/<%= vibe._id %>/clone" method="GET">
+                        <button>CLONE</button>
+                    </form>
+                <% } %>
+                <% if (user && user._id.toString() === vibe.user._id.toString()) { %>
+                        <form action="/vibes/<%= vibe._id %>/edit" method="GET">
+                            <button>EDIT</button>
+                        </form>
+                        <form action="/vibes/<%= vibe._id %>?_method=DELETE" method="POST">
+                         <button>DELETE</button>
+                        </form>
+                <% } %>
+            </div>
+            <div class="canvas">
+                <% for (let item of vibe.items) { %>
+                        <%- item.content %>
+                <% } %>
+            </div>  
+        </div>  
+        <% } %>
+<%- include('../partials/footer') %>

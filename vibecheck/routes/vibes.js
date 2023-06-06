@@ -14,6 +14,9 @@ router.get('/new', isLoggedIn, vibesCtrl.new)
 // edit
 router.get('/:id/edit', vibesCtrl.edit)
 
+// clone
+router.get('/:id/clone', vibesCtrl.clone)
+
 // show
 router.get('/:id', vibesCtrl.show)
 
@@ -29,8 +32,6 @@ router.put('/:id', vibesCtrl.update)
 // like
 router.put('/:id/like', vibesCtrl.like)
 
-// unlike 
-router.put('/:id/unlike', vibesCtrl.unlike)
 
 
 
