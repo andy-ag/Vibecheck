@@ -289,7 +289,6 @@ input[type="text"]
 }
 
 #settings-box {
-  margin-top: 10px;
   gap: 5px;
   display: flex;
   flex-direction: column;

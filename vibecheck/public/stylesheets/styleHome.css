@@ -69,11 +69,10 @@ html {
     margin-right: 0 auto;
     width: 100%;
     height: auto;
-    max-width: 100%;
+    max-height: calc(100vh - 280px);
   }
 
   #intro-text {
-    margin: 0;
     width: calc(100%-20px);
     max-width: 100%; 
   }
@@ -87,15 +86,16 @@ html {
     margin: 0 100px 0 100px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
   }
   
   #homepage-textbox {
-    padding: 30px;
+    padding: 15px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    height: 90vh;
   }
   
   button, form {
@@ -138,69 +138,4 @@ html {
     display: grid;
     overflow: hidden;
     gap: 0;
-  }
-  
-  #template-title {
-    display: none;
-  }
-  
-  .text, .link {
-    border: solid black 1px;
-    height: 200px;
-    width: 200px;
-    position: absolute;
-    overflow: auto;
-    z-index: 10;
-  }
-  
-  .image {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    overflow: auto;
-    z-index: 10;
-  }
-  
-  .drag {
-    display: flex;
-    justify-content: flex-end;
-    padding: 10px;
-    z-index: 11;
-  }
-  
-  .textbox {
-    border: solid red 1px;
-    height: 80%
-  }
-  
-  #image-popup, #link-popup {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -50px;
-    margin-left: -50px;
-    width: 300px;
-    height: 300px;
-    border: solid black 1px;
-    visibility: hidden;
-    z-index: 100;
-  }
-  
-  #add-url {
-    height: 50px;
-  }
-  
-  .imgdiv {
-    height: auto;
-    width: auto;
-  }
-  
-  #canvas, .canvas {
-    position: relative;
-    height: 800px;
-    width: 1500px;
-    border: solid black 1px;
-    margin-bottom: 50px;
   }
