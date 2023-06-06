@@ -18,7 +18,7 @@
     <% if (user && user._id.toString() === vUser._id.toString()) { %>
         <h1>Your vibes</h1> 
     <% } else { %> 
-        <h1>Vibes by <%= vUser.name %></h1>
+        <h1>Vibes by <%= vUser.username %></h1>
     <% } %>
 </div>
     <% if (vibes.length === 0) { %>

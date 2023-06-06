@@ -3,19 +3,19 @@ const express = require('express')
 const router = express.Router()
 const vibesCtrl = require('../controllers/vibes')
 const vibes = require('../controllers/vibes')
-const isLoggedIn = require('../helpers/flow').isLoggedIn
+const { hasUsername, isLoggedIn } = require('../helpers/flow')
 
 // index
 router.get('/', vibesCtrl.index)
 
 // new
-router.get('/new', isLoggedIn, vibesCtrl.new)
+router.get('/new', isLoggedIn, hasUsername, vibesCtrl.new)
 
 // edit
 router.get('/:id/edit', vibesCtrl.edit)
 
 // clone
-router.get('/:id/clone', vibesCtrl.clone)
+router.get('/:id/clone', hasUsername, vibesCtrl.clone)
 
 // show
 router.get('/:id', vibesCtrl.show)
@@ -30,7 +30,7 @@ router.delete('/:id', vibesCtrl.remove)
 router.put('/:id', vibesCtrl.update)
 
 // like
-router.put('/:id/like', vibesCtrl.like)
+router.put('/:id/like', hasUsername, vibesCtrl.like)
 
 
 

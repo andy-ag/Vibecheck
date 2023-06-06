@@ -1,0 +1,13 @@
+<main>
+<%- include('../partials/header') %>
+
+<div class="wrapper-col">
+    <form style="margin-top: 20px" action="/auth/username" method="POST">
+        <input type="text" required id="username" name="username" placeholder="Pick username" />
+        <button>SUBMIT</button>
+    </form>
+</div>
+
+<div style="margin-top: -30px;" class="wrapper"><h4><%= message %></h4></div>
+
+<%- include('../partials/footer') %>

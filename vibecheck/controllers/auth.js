@@ -2,6 +2,7 @@
 //Todo write controllers
 //Todo export titles
 const passport = require('passport')
+const User = require('../models/user')
 
 function loginPage (req, res) {
     res.render('auth/login', { title: 'Login'})
@@ -31,9 +32,30 @@ function logout(req, res) {
       })
 }
 
+function usernameSelection(req, res) {
+    res.render('auth/username', {message: ''})
+}
+
+async function setUsername(req, res) {
+    console.log(req.body.username)
+    const user = await User.findById(res.locals.user._id)
+    const checkTaken = await User.find({username: req.body.username})
+    if (checkTaken.length === 0) {
+        user.username = req.body.username
+        user.hasUsername = true
+        user.save()
+        res.render('users/settings', {message: 'Username updated'})
+    } else {
+        res.render('auth/username', {message: 'This username is already taken'})
+    }
+    
+}
+
 module.exports = {
     loginPage,
     callback,
     login,
-    logout
+    logout,
+    usernameSelection,
+    setUsername
 }

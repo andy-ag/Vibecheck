@@ -2,17 +2,20 @@
 <!-- todo add authentication failed notification -->
 <main>
 <%- include('../partials/header') %>
-
-<!-- <form id="signup-form" action="/auth/form" method="POST">
-    <label>Username:</label>
-    <input type="text" name="username">
-    <input type="submit" value="Sign up with Google">
-</form> -->
 <div class="wrapper">
-<div id="auth-box">
-<a href="/auth/google">Sign up with Google</a>
-<a href="/auth/google">Log in with Google</a>
+    <div id="auth-box">
+        <form action="/auth/google" method="GET">
+            <button>SIGN UP WITH GOOGLE</button>
+        </form>
+        <form action="/auth/google" method="GET">
+            <button>LOG IN WITH GOOGLE</button>
+        </form>
+    </div>
 </div>
+<div class="wrapper">
+    <% if (user) { %>
+        <h4 class ="message" style="margin-top: -40px;">Signed-in successfully!</h4>
+    <% } %>
 </div>
 
 <%- include('../partials/footer') %>

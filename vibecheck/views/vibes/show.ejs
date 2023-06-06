@@ -1,10 +1,10 @@
 <!-- View published board -->
 <%- include('../partials/header') %>
 <main>
-<title><%= vibe.name %> by <%= vibe.user.name %></title>    
+<title><%= vibe.name %> by <%= vibe.user.username %></title>    
 <div class="canvas-box">
     <div class="namebox">
-        <h3><%= vibe.name %> by <a href="/users/<%= vibe.user._id %>"><%= vibe.user.name %></a></h3>
+        <h3><%= vibe.name %> by <a href="/users/<%= vibe.user._id %>"><%= vibe.user.username %></a></h3>
     </div>
     <div class="buttons">
     <% if (user) { %>

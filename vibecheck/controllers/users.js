@@ -5,7 +5,7 @@ const User = require('../models/user')
 const Vibe = require('../models/vibe')
 
 function settings(req, res) {
-    res.render('users/settings', { title: 'Settings'})
+    res.render('users/settings', {message: ''})
 }
 
 async function vibes(req, res) {

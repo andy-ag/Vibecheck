@@ -43,7 +43,6 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
-// Make user accessible on req
 app.use(function (req, res, next) {
   res.locals.user = req.user
   next()

@@ -137,11 +137,6 @@ h3 {
   align-items: center;
   height: 150px;
   width: 280px;
-  gap: 10px;
-}
-
-#auth-box>a {
-  font-size: 30px;
 }
 
 #landing-background, #error-background{
@@ -312,4 +307,8 @@ input[type="text"]
 
 #link-text {
   text-align: center;
+}
+
+.message {
+  color: rgb(117, 251, 76);
 }
