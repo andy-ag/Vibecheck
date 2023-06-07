@@ -1,6 +1,4 @@
 //! Script to monitor canvas operations
-//TODO add layering for images - active image always first
-
 document.addEventListener('click', e => {
     let clicker = e.target.id
     switch (clicker) {
@@ -56,12 +54,6 @@ document.addEventListener('click', e => {
 document.addEventListener('click', e =>{
   if (e.target.id === 'toggle-headers') toggleHeaders()
 })
-
-//TODO Check: can viewwindow fit full canvas? If so, display normal
-//TODO If not: shrink canvas and all elements proportionally
-//TODO potential issue with spotify widget
-
-//TODO fix functionality - iterate over elements and hide headers
 
 const image = document.getElementById('image').id
 const text = document.getElementById('text').id

@@ -37,7 +37,6 @@ app.use(session({
   secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true
-    //Todo add secure cookies when in production
   //cookie: { secure: true }  
 }))
 app.use(passport.initialize())

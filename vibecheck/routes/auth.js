@@ -1,8 +1,6 @@
 const express = require('express')
 const router = express.Router()
-// const passport = require('passport')
 const authCtrl = require('../controllers/auth')
-
 
 router.get('/auth', authCtrl.loginPage)
 
