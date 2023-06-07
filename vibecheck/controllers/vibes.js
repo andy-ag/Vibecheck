@@ -55,10 +55,6 @@ async function remove (req, res) {
         }
         await user.ownVibes.pull(vibe._id)
         await user.save()
-        // for (let i=0; i<likedBy.length; i++) {
-        //     likedBy[i].likedVibes.pull(vibe._id)
-        //     await likedBy[i].save()
-        // }
         for (let i=0; i<likedBy.length; i++) {
             await User.findOneAndUpdate(
               { _id: likedBy[i]._id },

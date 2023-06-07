@@ -1,6 +1,4 @@
 //! Manages control flow for user-related actions
-//Todo write controllers
-//Todo export titles
 const User = require('../models/user')
 const Vibe = require('../models/vibe')
 

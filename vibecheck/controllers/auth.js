@@ -1,6 +1,4 @@
 //! Manages control flow for authentication-related actions
-//Todo write controllers
-//Todo export titles
 const passport = require('passport')
 const User = require('../models/user')
 
@@ -12,7 +10,7 @@ function callback(req, res, next) {
     passport.authenticate(
         'google',
         {
-          successRedirect: req.session.originalUrl || req.session.ref || '/vibes',
+          successRedirect: req.session.ref || '/vibes',
           failureRedirect: '/auth/login',
         }
     )(req, res, next)
