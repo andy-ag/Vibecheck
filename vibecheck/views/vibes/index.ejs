@@ -1,12 +1,12 @@
 <%- include('../partials/header') %>
-<main class="d-flex flex-column">
+<main class="d-flex flex-column mb-4">
 <title>Browse vibes</title>
 <% if (vibes.length === 0) { %>
     <h2 style="margin-top: 30px" id="shy">Looks like there's nothing here - be the first to create a vibe!</h2>
 <% } %>
 
 <% for (let vibe of vibes) { %>   
-<div class="d-flex flex-column justify-content-center mt-2">
+<div class="d-flex flex-column justify-content-center my-4">
     <div class="d-flex flex-row justify-content-start align-self-center align-items-center canvassize name-change">
         <h3><a href="/vibes/<%= vibe._id %>"><%= vibe.name %></a> by <a href="/users/<%= vibe.user._id %>"><%= vibe.user.username %></a></h3>
     </div>

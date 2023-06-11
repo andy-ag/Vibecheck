@@ -1,5 +1,5 @@
 <%- include('../partials/header') %>
-<main class="d-flex flex-column">
+<main class="d-flex flex-column mb-4">
 <title>User vibes</title>
 
 <div class="d-flex flex-column justify-content-space-around align-items-center m-0">
@@ -28,7 +28,7 @@
 </div>       
 
 <% for (let vibe of vibes) { %>
-<div class="d-flex flex-column justify-content-center mt-2">
+<div class="d-flex flex-column justify-content-center my-4">
     <div class="d-flex flex-row justify-content-start align-self-center align-items-center canvassize name-change">
         <h3><a href="/vibes/<%= vibe._id %>"><%= vibe.name %></a></h3>
     </div>
