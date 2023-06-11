@@ -1,45 +1,45 @@
 <%- include('../partials/header') %>
-<main>
+<main class="d-flex flex-column">
 <title>Browse vibes</title>
 <% if (vibes.length === 0) { %>
     <h2 style="margin-top: 30px" id="shy">Looks like there's nothing here - be the first to create a vibe!</h2>
 <% } %>
 
-<% for (let vibe of vibes) { %>
-<div class="canvas-box">
-    <div class="namebox">
+<% for (let vibe of vibes) { %>   
+<div class="d-flex flex-column justify-content-center mt-2">
+    <div class="d-flex flex-row justify-content-start align-self-center align-items-center canvassize name-change">
         <h3><a href="/vibes/<%= vibe._id %>"><%= vibe.name %></a> by <a href="/users/<%= vibe.user._id %>"><%= vibe.user.username %></a></h3>
     </div>
-    <div class="buttons">
+    <div class="buttons d-flex flex-row justify-content-start align-self-center align-items-center canvassize">
         <% if (user) { %>
             <% if (vibe.likedBy.indexOf(user._id) === -1) { %>
                 <form action="/vibes/<%= vibe._id %>/like?_method=PUT" method="POST">
-                    <button>LIKE</button>
+                    <button class="btn browse-button">LIKE</button>
                 </form>
                 <% } else { %>
                 <form action="/vibes/<%= vibe._id %>/like?_method=PUT" method="POST">
-                 <button>UNLIKE</button>
+                 <button class="btn browse-button">UNLIKE</button>
                 </form>
             <% } %>
             <form action="/vibes/<%= vibe._id %>/clone" method="GET">
-                <button>CLONE</button>
+                <button class="btn browse-button">CLONE</button>
             </form>
         <% } %>
         <% if (user && user._id.toString() === vibe.user._id.toString()) { %>
                 <form action="/vibes/<%= vibe._id %>/edit" method="GET">
-                    <button>EDIT</button>
+                    <button class="btn browse-button">EDIT</button>
                 </form>
                 <form action="/vibes/<%= vibe._id %>?_method=DELETE" method="POST">
-                 <button>DELETE</button>
+                 <button class="btn browse-button">DELETE</button>
                 </form>
         <% } %>
     </div>
-    <div class="canvas">
+    <div class="canvas container">
         <% for (let item of vibe.items) { %>
                 <%- item.content %>
         <% } %>
     </div>  
-</div>  
+</div>
 <% } %>
 
 <%- include('../partials/footer') %>

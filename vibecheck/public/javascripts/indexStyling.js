@@ -6,7 +6,5 @@ const homepageWrapper = document.getElementById('homepage-wrapper')
 const homepageTextbox = document.getElementById('homepage-textbox')
 const introText = document.getElementById('intro-text')
 
-introText.style.borderRadius = '8px'
-introText.style.padding = '10px'
 introText.style.boxShadow = `0 0 20px 0 ${violet}`
-image.style.boxShadow = `0 0 30px 0 ${violet}`
+image.style.boxShadow = `0 0 20px 0 ${violet}`

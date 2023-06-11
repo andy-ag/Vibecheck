@@ -8,19 +8,23 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Exo:wght@300&family=VT323&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
   <script src="/javascripts/bannerStyling.js" defer></script>
 </head>
 <body>
-  <div id="banner">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  <div id="banner"></div>
+  <div id="home-header" class="d-flex flex-column justify-content-center align-items-center">
     <h1 id="vibecheck">VIBECHECK</h1>
     <nav>
-        <a href="/">Home</a>
-        <a href="/vibes">Browse</a>
-        <a href="/vibes/new">Add Vibe</a>
+      <a href="/vibes" class="btn btn-primary">Browse</a>
+      <a href="/vibes/new" class="btn btn-primary">Add Vibe</a>
       <% if (user) { %>
-        <a href="/users/<%= user._id %>">Account</a>
+      <a href="/users/<%= user._id %>" class="btn btn-primary">Account</a>
       <% } else { %>
-        <a href="/auth/google">Login</a>
+      <a href="/auth/google" class="btn btn-primary">Login</a>
       <% } %>
     </nav>
   </div>
+  <main>

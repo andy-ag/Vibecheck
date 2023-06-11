@@ -42,7 +42,7 @@ async function setUsername(req, res) {
         user.username = req.body.username
         user.hasUsername = true
         user.save()
-        res.render('users/settings', {message: 'Username updated'})
+        res.render('users/settings', {message: 'Username updated!'})
     } else {
         res.render('auth/username', {message: 'This username is already taken'})
     }

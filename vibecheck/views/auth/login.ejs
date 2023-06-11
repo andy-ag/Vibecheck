@@ -1,19 +1,18 @@
-<main>
 <%- include('../partials/header') %>
-<div class="wrapper">
-    <div id="auth-box">
-        <form action="/auth/google" method="GET">
-            <button>SIGN UP WITH GOOGLE</button>
-        </form>
-        <form action="/auth/google" method="GET">
-            <button>LOG IN WITH GOOGLE</button>
-        </form>
-    </div>
+<main class="d-flex flex-column align-items-center">
+
+<div class="d-flex flex-column justify-content-space-around align-items-center my-4 gap-1">
+    <form action="/auth/google" method="GET">
+        <button class="btn btn-primary settings-button">SIGN UP WITH GOOGLE</button>
+    </form>
+    <form action="/auth/google" method="GET">
+        <button class="btn btn-primary settings-button">LOG IN WITH GOOGLE</button>
+    </form>
 </div>
-<div class="wrapper">
-    <% if (user) { %>
-        <h4 class ="message" style="margin-top: -40px;">Signed-in successfully!</h4>
-    <% } %>
+<div>
+<% if (user) { %>
+    <h4 class ="message">Signed-in successfully!</h4>
+<% } %>
 </div>
 
 <%- include('../partials/footer') %>

@@ -1,15 +1,11 @@
 <%- include('./partials/headerHome') %>
 <script src="/javascripts/indexStyling.js" defer></script>
 <title>Vibecheck</title>
-
-<div id="homepage-wrapper">
-  <div id="homepage-textbox">
-    <p id="intro-text">They say a picture is worth a thousand words. They also say, however, that the book is always better than the (moving) picture. As a fundamentally unopinionated enterprise, we don’t say any such thing, but instead put the tools in your hands. With an arsenal of text, images, and links at your disposal, it’s up to you to craft the perfect vibe - the distilled essence of an idea, a feeling, perhaps a memory of a time long lost, or one yet to come? The canvas is yours to decide.</p>
-    <form id="signup-home" action="/auth" method="GET">
-      <button type="submit">SIGN  UP  /  LOG   IN</button>
-    </form>
-    <img id = "landing-background">
-  </div>
-</div>
-    
+<div class="d-flex flex-column justify-content-center align-items-center m-2">
+  <form id="signup-home" action="/auth" method="GET" class="m-2">
+    <button type="submit"class="btn btn-primary">SIGN  UP  /  LOG   IN</button>
+  </form>  
+  <p id="intro-text" class="m-2 p-2">They say a picture is worth a thousand words. They also say, however, that the book is always better than the (moving) picture. As a fundamentally unopinionated enterprise, we don’t say any such thing, but instead put the tools in your hands. With an arsenal of text, images, and links at your disposal, it’s up to you to craft the perfect vibe - the distilled essence of an idea, a feeling, perhaps a memory of a time long lost, or one yet to come? The canvas is yours to decide.</p>
+    <img id = "landing-background" class="img-fluid rounded mx-auto d-block m-2">
+</div>    
 <%- include('./partials/footer') %>

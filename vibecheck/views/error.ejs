@@ -1,12 +1,10 @@
 <%- include('./partials/header') %>
+<main class="d-flex flex-column">
 <title>Oops..</title>
 
-<div class="wrapper">
-    <div class="wrapper-col">
-        <h1 style="margin-top: 35px">The vibes are off :&#40;</h1>
-        <h1 style="margin-top: -20px"><%= message %> - <%= error.status %></h1>
-        <img id="error-background" src="https://cdn.discordapp.com/attachments/1093240258302324878/1115572453725438012/andy_agv_retro_cyberpunk_computer_displaying_a_fullscreen_sad_f_b29030bb-c1be-4ad5-ac0b-22c2aead5986.png">
-    </div>
+<div class="d-flex flex-column justify-content-space-around align-items-center m-4"> 
+        <h1>The vibes are off :&#40;</h1>
+        <h1><%= message %> - <%= error.status %></h1>
+        <img id="error-background" class="img-fluid rounded mx-auto d-block m-2" src="https://cdn.discordapp.com/attachments/1093240258302324878/1115572453725438012/andy_agv_retro_cyberpunk_computer_displaying_a_fullscreen_sad_f_b29030bb-c1be-4ad5-ac0b-22c2aead5986.png">
 </div>
-
 <%- include('./partials/footer') %>

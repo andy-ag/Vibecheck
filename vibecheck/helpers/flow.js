@@ -2,9 +2,8 @@
 const User = require('../models/user')
 
 function isLoggedIn(req, res, next) {
-    req.session.originalUrl = req.originalUrl
     if (req.isAuthenticated()) return next()
-    res.redirect('/auth/google')
+    res.redirect('/auth')
 }
 
 async function hasUsername(req, res, next) {

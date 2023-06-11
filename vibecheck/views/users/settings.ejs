@@ -1,19 +1,17 @@
 <%- include('../partials/header') %>
-<main>
+<main class="d-flex flex-column align-items-center">
 <title>Account settings</title>    
 
-<div class="wrapper" style="margin-top: 20px">
-    <div id="settings-box">
+<div class="d-flex flex-column justify-content-space-around align-items-center m-4 gap-1">
         <form action="/auth/username" method="GET">
-            <button>Set / change username</button>
+            <button class="btn btn-primary settings-button">Set / change username</button>
         </form>
         <form action="/logout" method="GET">
-            <button>Logout</button>
+            <button class="btn btn-primary settings-button">Logout</button>
         </form>
         <form action="/users/<%= user._id %>?_method=DELETE" method="POST">
-            <button>Delete Account</button>
+            <button class="btn btn-primary settings-button">Delete Account</button>
         </form>
-    </div>
 </div>
-<div style="margin-top: -20px;" class="wrapper"><h4 class="message"><%= message %></h4></div>
+<div><h4 class="message"><%= message %></h4></div>
 <%- include('../partials/footer') %>

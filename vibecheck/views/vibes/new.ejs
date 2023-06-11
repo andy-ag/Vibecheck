@@ -1,47 +1,49 @@
 <!-- Board creation page -->
 <!-- Page cannot be accessed without being logged in -->
 <%- include('../partials/header') %>
-<main>
+<main class="d-flex flex-column">
 
 <script src="/javascripts/resizeDrag.js" defer></script>
 <script src="/javascripts/canvas.js" defer></script>
 <title>New vibe</title>
 
-<div class="canvas-box">
-    <div class="namebox">
+<div class="d-flex flex-column justify-content-center mt-2">
+    <div id="name-change" class="d-flex flex-row justify-content-start align-self-center align-items-center canvassize">
         <form onkeydown="return event.key != 'Enter';">
             <input type="text" id="vibename" maxlength="100">
-            <button id="vibename-submit" type="button">Update name</button>
+            <button id="vibename-submit" type="button" class="btn browse-button">Update name</button>
         </form>
         <h1 id="vibename-h1">What's the vibe?</h1>
-    </div>    
-    <div class="buttons">
-        <button id="image">Image</button>
-        <button id="text">Text</button>
-        <button id="link">Link</button>
-        <button id="toggle-headers">Toggle headers</button>
-        <button id="save">SAVE</button>
+    </div> 
+
+    <div id="vibe-buttons" class="d-flex flex-row justify-content-start align-items-center align-self-center canvassize">
+        <button id="image" class="btn browse-button">Image</button>
+        <button id="text" class="btn browse-button">Text</button>
+        <button id="link" class="btn browse-button">Link</button>
+        <button id="toggle-headers" class="btn browse-button">Toggle headers</button>
+        <button id="save" class="btn browse-button">SAVE</button>
     </div>
-    <div id="canvas">
+
+    <div id="canvas" class="container">
         <div id="image-popup">
             Provide url of image to be added
             <div id="add-url" input type="text" contenteditable="true"></div>
             <div class="wrapper" style="gap: 10px">
-                <button id="cancel-image">Cancel</button>
-                <button id="submit-image">Add</button>
+                <button id="cancel-image" class="btn browse-button">Cancel</button>
+                <button id="submit-image" class="btn browse-button">Add</button>
             </div>  
         </div>
+
         <div id="link-popup">
             Provide url of link to be added
             <div id="add-link" input type="text" contenteditable="true"></div>
             Provide text to display (optional)
             <div id="link-text" input type="text" contenteditable="true"></div>
             <div class="wrapper" style="gap: 10px">
-                <button id="cancel-link">Cancel</button>
-                <button id="submit-link">Add</button>
+                <button id="cancel-link" class="btn browse-button">Cancel</button>
+                <button id="submit-link" class="btn browse-button">Add</button>
             </div>
         </div>
     </div>
 </div>
-
 <%- include('../partials/footer') %>

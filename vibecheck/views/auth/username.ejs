@@ -1,13 +1,13 @@
-<main>
 <%- include('../partials/header') %>
+<main class="d-flex flex-column align-items-center">
 
-<div class="wrapper-col">
-    <form style="margin-top: 20px" action="/auth/username" method="POST">
+<div class="d-flex flex-column justify-content-space-around align-items-center my-4 gap-1">
+    <form action="/auth/username" method="POST">
         <input type="text" required id="username" name="username" placeholder="Pick username" />
-        <button>SUBMIT</button>
+        <button class="btn btn-primary">SUBMIT</button>
     </form>
 </div>
 
-<div style="margin-top: -30px;" class="wrapper"><h4><%= message %></h4></div>
+<div><h4><%= message %></h4></div>
 
 <%- include('../partials/footer') %>

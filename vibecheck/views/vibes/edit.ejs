@@ -2,49 +2,49 @@
 <script src="/javascripts/resizeDrag.js" defer></script>
 <script src="/javascripts/canvasEdit.js" defer></script>
 
-<main>
+<main class="d-flex flex-column">
 <title>Editing <%= vibe.name %></title>
 
-<div class="canvas-box">
-    <div class="namebox">
+<div class="d-flex flex-column justify-content-center mt-2">
+    <div id="name-change" class="d-flex flex-row justify-content-start align-self-center align-items-center canvassize">
         <form onkeydown="return event.key != 'Enter';">
          <input type="text" id="vibename" maxlength="100" value="<%= vibe.name %>">
-            <button id="vibename-submit" type="button">Update name</button>
+            <button id="vibename-submit" type="button" class="btn browse-button">Update name</button>
         </form>
         <h1 id="template-title"><%= vibe.name %></h1>
         <h1 id="vibename-h1"></h1>
     </div>
 
-    <div class="buttons">
-        <button id="image">Image</button>
-        <button id="text">Text</button>
-        <button id="link">Link</button>
-        <button id="toggle-headers">Toggle headers</button>
-        <button id="update">UPDATE</button>
+    <div id="vibe-buttons" class="d-flex flex-row justify-content-start align-items-center align-self-center canvassize">
+        <button id="image" class="btn browse-button">Image</button>
+        <button id="text" class="btn browse-button">Text</button>
+        <button id="link" class="btn browse-button">Link</button>
+        <button id="toggle-headers" class="btn browse-button">Toggle headers</button>
+        <button id="update" class="btn browse-button">UPDATE</button>
     </div>
 
-        <div id="canvas">
-            <div id="image-popup">
-                Provide url of image to be added
-                <div id="add-url" input type="text" contenteditable="true"></div>
-                <div class="wrapper" style="gap: 10px">
-                    <button id="cancel-image">Cancel</button>
-                    <button id="submit-image">Add</button>
-                </div>  
+    <div id="canvas" class="container">
+        <div id="image-popup">
+            Provide url of image to be added
+            <div id="add-url" input type="text" contenteditable="true"></div>
+            <div class="wrapper" style="gap: 10px">
+                <button id="cancel-image" class="btn browse-button">Cancel</button>
+                <button id="submit-image" class="btn browse-button">Add</button>
+            </div>  
+        </div>
+        <div id="link-popup">
+            Provide url of link to be added
+            <div id="add-link" input type="text" contenteditable="true"></div>
+            Provide text to display (optional)
+            <div id="link-text" input type="text" contenteditable="true"></div>
+            <div class="wrapper" style="gap: 10px">
+                <button id="cancel-link" class="btn browse-button">Cancel</button>
+                <button id="submit-link" class="btn browse-button">Add</button>
             </div>
-            <div id="link-popup">
-                Provide url of link to be added
-                <div id="add-link" input type="text" contenteditable="true"></div>
-                Provide text to display (optional)
-                <div id="link-text" input type="text" contenteditable="true"></div>
-                <div class="wrapper" style="gap: 10px">
-                    <button id="cancel-link">Cancel</button>
-                    <button id="submit-link">Add</button>
-                </div>
-            </div>
-            <% for (let item of vibe.items) { %>
-                <%- item.content %>
-            <% } %>
+        </div>
+        <% for (let item of vibe.items) { %>
+            <%- item.content %>
+        <% } %>
     </div>
 </div>
 
