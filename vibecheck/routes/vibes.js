@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const vibesCtrl = require('../controllers/vibes')
-const vibes = require('../controllers/vibes')
 const { hasUsername, isLoggedIn } = require('../helpers/flow')
 
 router.get('/', vibesCtrl.index)
