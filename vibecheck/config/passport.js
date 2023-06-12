@@ -1,10 +1,7 @@
 //! Passport module config for Google Authentication
-
 const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 const User = require('../models/user');
-
-//TODO Add ability to select username
 
 passport.use(new GoogleStrategy(
     {
@@ -36,4 +33,5 @@ passport.serializeUser(function(user, cb) {
 passport.deserializeUser(async function(userId, cb) {
     cb(null, await User.findById(userId))
   })
-    
+
+  

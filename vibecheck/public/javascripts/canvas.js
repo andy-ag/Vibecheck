@@ -82,58 +82,58 @@ const vibenameH1 = document.getElementById('vibename-h1')
 let idAssigner = 0
 
 class Vibe{
-constructor(name) {
-  this.name = name
-  this.items = []
-}
-
-addItem(element) {
-  this.items.unshift(new Item(element.id))
-}
-
-removeItem(element) {
-  const removalIndex = this.items.findIndex(item => item.itemId === getNumericId(element))
-  this.items.splice(removalIndex, 1)
-}
-
-getValues() {
-  for (let item of this.items) {
-    item.getValue()
+  constructor(name) {
+    this.name = name
+    this.items = []
   }
-}
+
+  addItem(element) {
+    this.items.unshift(new Item(element.id))
+  }
+
+  removeItem(element) {
+    const removalIndex = this.items.findIndex(item => item.itemId === getNumericId(element))
+    this.items.splice(removalIndex, 1)
+  }
+
+  getValues() {
+    for (let item of this.items) {
+      item.getValue()
+    }
+  }
 }
 
 class Item{
-constructor(itemId) {
-  this.itemId = itemId
-  this.content = null
-}
+  constructor(itemId) {
+    this.itemId = itemId
+    this.content = null
+  }
 
-getValue() {
-  const element = document.getElementById(this.itemId)
-  this.content = element.outerHTML
-}
+  getValue() {
+    const element = document.getElementById(this.itemId)
+    this.content = element.outerHTML
+  }
 }
 
 newVibe = new Vibe('unnamed')
 
 async function saveVibe() {
-newVibe.getValues()
-try {
-  const response = await fetch(saveUrl, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    redirect: 'follow',
-    body: JSON.stringify(newVibe)
-  })
-  if (response.redirected) {
-    window.location.href = response.url;
-}
-} catch (error) {
-    console.log(error)
-}
+  newVibe.getValues()
+  try {
+    const response = await fetch(saveUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      redirect: 'follow',
+      body: JSON.stringify(newVibe)
+    })
+    if (response.redirected) {
+      window.location.href = response.url;
+  }
+  } catch (error) {
+      console.log(error)
+  }
 }
 
 function addDiv() {

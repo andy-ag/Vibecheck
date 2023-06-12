@@ -12,7 +12,6 @@ function isLoggedInHome(req, res, next) {
 }
 
 async function hasUsername(req, res, next) {
-    req.session.originalUrl = req.originalUrl
     const user = await User.findById(res.locals.user._id)
     if (user.hasUsername === true) return next()
     res.redirect('/auth/username')

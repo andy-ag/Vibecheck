@@ -7,12 +7,8 @@ const originalWidth = 1800
 const ratio = originalWidth/14
 let screenWidth = window.innerWidth
 
-const teal = 'rgb(164, 251, 202)'
 const violet = 'rgb(187, 186, 255)'
-const acid = 'rgb(143, 239, 73)'
-const fuchsia = 'rgb(248, 135, 239)'
 
-// window.addEventListener('resize')
 window.addEventListener('resize', createTiling)
 banner.style.boxShadow = `0 0 20px 0 ${violet}`
 
@@ -44,3 +40,4 @@ function extractNumbers(string) {
 function removeImages() {
     document.querySelectorAll("#banner img").forEach(img => img.remove());
 }
+
