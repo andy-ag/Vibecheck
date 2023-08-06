@@ -1,8 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-//TODO add ability to select username
-
 const userSchema = new Schema({
     googleId: {
         type: String,
