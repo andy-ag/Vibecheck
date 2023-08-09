@@ -75,8 +75,9 @@ After thinking of the core idea, I wanted to come up with a list of features tha
 
 After deciding on the appropriate feature set, I produced [wireframes](https://www.figma.com/file/sqwnkraKpymyWMleYBDVfQ/Project-2---VibeCheck?type=whiteboard&node-id=0-1&t=SD7iBezNYH2uh93s-0) and an ERD. The app ended up matching the wireframe quite closely, and the ERD only needed some minor tweaks to accommodate the specific implementation of the desired functionality that I ended up with.
 
-ERD:  
-<img src="./readme_assets/erd.png" alt="" width="300"/> <img src="./readme_assets/menu_f.png" alt="" width="300"/>
+<a href="https://i.imgur.com/GdSQsvT.png" target="_blank" rel="noopener noreferrer">ERD</a>:  
+<!-- <img src="./readme_assets/erd.png" alt="" width="300"/> -->
+<img src="https://i.imgur.com/GdSQsvT.png" alt="" width="300"/>
 
 models/user.js
 ```javascript
@@ -147,17 +148,20 @@ const vibeSchema = new Schema({
 module.exports = mongoose.model('Vibe', vibeSchema)
 ```
 
-Landing page:
+Landing page - <a href="https://i.imgur.com/5qhqpql.png" target="_blank" rel="noopener noreferrer">wireframe</a> / <a href="https://i.imgur.com/rxDDC5g.jpg" target="_blank" rel="noopener noreferrer">final</a>:
 
-<img src="./readme_assets/landing_wf.png" alt="" width="300"/> <img src="./readme_assets/landing_f.png" alt="" width="300"/>
+<!-- <img src="./readme_assets/landing_wf.png" alt="" width="300"/> <img src="./readme_assets/landing_f.png" alt="" width="300"/> -->
+<img src="https://i.imgur.com/5qhqpql.png" alt="" width="300"/> <img src="https://i.imgur.com/rxDDC5g.jpg" alt="" width="300"/>
 
-Canvas:
+Canvas - <a href="https://i.imgur.com/xMNMAqc.png" target="_blank" rel="noopener noreferrer">wireframe</a> / <a href="https://i.imgur.com/Y8ZGEkC.png" target="_blank" rel="noopener noreferrer">final</a>:
 
-<img src="./readme_assets/canvas_wf.png" alt="" width="300"/> <img src="./readme_assets/canvas_f.png" alt="" width="300"/>
+<!-- <img src="./readme_assets/canvas_wf.png" alt="" width="300"/> <img src="./readme_assets/canvas_f.png" alt="" width="300"/> -->
+<img src="https://i.imgur.com/xMNMAqc.png" alt="" width="300"/> <img src="https://i.imgur.com/Y8ZGEkC.png" alt="" width="300"/>
 
-Feed:
+Feed - <a href="https://i.imgur.com/F1arkTa.png" target="_blank" rel="noopener noreferrer">wireframe</a> / <a href="https://i.imgur.com/BoD3LZI.png" target="_blank" rel="noopener noreferrer">final</a>:
 
-<img src="./readme_assets/feed_wf.png" alt="" width="300"/> <img src="./readme_assets/feed_f.png" alt="" width="300"/>
+<!-- <img src="./readme_assets/feed_wf.png" alt="" width="300"/> <img src="./readme_assets/feed_f.png" alt="" width="300"/> -->
+<img src="https://i.imgur.com/F1arkTa.png" alt="" width="300"/> <img src="https://i.imgur.com/BoD3LZI.png" alt="" width="300"/>
 
 ## Build process
 I started the project by creating a skeleton back-end structure - adding all the necessary routes, adding the controllers where it was a simple page render, and leaving controller templates where the action is complex (create, update actions). I then created basic ejs templates for all the required pages and populated them with the associated links. Having a fully navigable website structure from the get-go allowed me to keep testing the user experience throughout the various stages of the project.
